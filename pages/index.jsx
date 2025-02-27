@@ -46,6 +46,8 @@ export default function HomePage({ ...props }) {
 
                                     <p className="card-text"></p>
                                     <small className="text-muted">Data de término: {humanDate(commitment.endDate)}</small>
+                                    <small className="text-muted">Atualizado: {humanDatePast(commitment.updatedAt)}</small>
+
                                 </div>
                                 <footer className="card-footer p-2 bg-transparent border-0">
                                     <Button color="light" label="Ver detalhes" className="btn-block w-100" size="sm" onClick={() => {
