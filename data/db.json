@@ -1,0 +1,147 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "profilePictureURI": "https://placehold.co/128x128",
+            "politicianParty": "Partido A",
+            "name": "Candidato A",
+            "politicianRole": "Presidente",
+            "role": "POLITICIAN",
+            "createdAt": "2025-01-01T00:00:00Z",
+            "updatedAt": "2025-01-10T00:00:00Z"
+        },
+        {
+            "id": 2,
+            "profilePictureURI": "https://placehold.co/128x128",
+            "politicianParty": "Partido B",
+            "name": "Candidato B",
+            "politicianRole": "Governador",
+            "role": "POLITICIAN",
+            "createdAt": "2025-01-05T00:00:00Z",
+            "updatedAt": "2025-01-12T00:00:00Z"
+        },
+        {
+            "id": 3,
+            "profilePictureURI": "https://placehold.co/128x128",
+            "politicianParty": "Partido C",
+            "name": "Candidato C",
+            "politicianRole": "Senador",
+            "role": "POLITICIAN",
+            "createdAt": "2025-01-07T00:00:00Z",
+            "updatedAt": "2025-01-14T00:00:00Z"
+        },
+        {
+            "id": 4,
+            "profilePictureURI": "https://placehold.co/128x128",
+            "politicianParty": "Partido D",
+            "name": "Candidato D",
+            "politicianRole": "Deputado",
+            "role": "POLITICIAN",
+            "createdAt": "2025-01-09T00:00:00Z",
+            "updatedAt": "2025-01-16T00:00:00Z"
+        },
+        {
+            "id": 5,
+            "profilePictureURI": "https://placehold.co/128x128",
+            "politicianParty": "Partido E",
+            "name": "Candidato E",
+            "politicianRole": "Vereador",
+            "role": "POLITICIAN",
+            "createdAt": "2025-01-10T00:00:00Z",
+            "updatedAt": "2025-01-17T00:00:00Z"
+        }
+    ],
+    "commitments": [
+        {
+            "id": 1,
+            "authorId": 1,
+            "title": "Construir novas escolas",
+            "description": "Construir escolas em regiões mais carentes para melhorar a educação.",
+            "status": "ACTIVE",
+            "endDate": "2026-12-31T00:00:00Z",
+            "createdAt": "2025-01-01T00:00:00Z",
+            "updatedAt": "2025-01-10T00:00:00Z"
+        },
+        {
+            "id": 2,
+            "authorId": 1,
+            "title": "Aumentar o salário dos professores",
+            "description": "Ajustar os salários dos professores para melhorar a qualidade de ensino.",
+            "status": "PENDING",
+            "endDate": "2025-12-31T00:00:00Z",
+            "createdAt": "2025-01-02T00:00:00Z",
+            "updatedAt": "2025-01-11T00:00:00Z"
+        },
+        {
+            "id": 3,
+            "authorId": 2,
+            "title": "Construir hospitais",
+            "description": "Construir hospitais em áreas afastadas e melhorar o sistema de saúde.",
+            "status": "ACTIVE",
+            "endDate": "2026-06-30T00:00:00Z",
+            "createdAt": "2025-01-03T00:00:00Z",
+            "updatedAt": "2025-01-13T00:00:00Z"
+        },
+        {
+            "id": 4,
+            "authorId": 2,
+            "title": "Aumentar a segurança pública",
+            "description": "Investir mais em segurança para reduzir a criminalidade nas grandes cidades.",
+            "status": "ACTIVE",
+            "endDate": "2026-06-30T00:00:00Z",
+            "createdAt": "2025-01-04T00:00:00Z",
+            "updatedAt": "2025-01-14T00:00:00Z"
+        },
+        {
+            "id": 5,
+            "authorId": 3,
+            "title": "Reformar estradas estaduais",
+            "description": "Reformar estradas estaduais para garantir mais segurança no trânsito.",
+            "status": "PENDING",
+            "endDate": "2025-12-31T00:00:00Z",
+            "createdAt": "2025-01-06T00:00:00Z",
+            "updatedAt": "2025-01-15T00:00:00Z"
+        },
+        {
+            "id": 6,
+            "authorId": 3,
+            "title": "Melhorar o transporte público",
+            "description": "Ampliar e melhorar a qualidade do transporte público para reduzir o tráfego.",
+            "status": "PENDING",
+            "endDate": "2025-12-31T00:00:00Z",
+            "createdAt": "2025-01-07T00:00:00Z",
+            "updatedAt": "2025-01-16T00:00:00Z"
+        },
+        {
+            "id": 7,
+            "authorId": 4,
+            "title": "Apoiar pequenas empresas",
+            "description": "Criar incentivos fiscais para apoiar as pequenas empresas e empreendedores.",
+            "status": "ACTIVE",
+            "endDate": "2025-06-30T00:00:00Z",
+            "createdAt": "2025-01-08T00:00:00Z",
+            "updatedAt": "2025-01-17T00:00:00Z"
+        },
+        {
+            "id": 8,
+            "authorId": 4,
+            "title": "Criar programas de habitação popular",
+            "description": "Criar programas de habitação popular para famílias de baixa renda.",
+            "status": "ACTIVE",
+            "endDate": "2025-06-30T00:00:00Z",
+            "createdAt": "2025-01-09T00:00:00Z",
+            "updatedAt": "2025-01-18T00:00:00Z"
+        },
+        {
+            "id": 9,
+            "authorId": 5,
+            "title": "Melhorar a educação infantil",
+            "description": "Investir na educação infantil para garantir uma base sólida para as crianças.",
+            "status": "PENDING",
+            "endDate": "2025-12-31T00:00:00Z",
+            "createdAt": "2025-01-10T00:00:00Z",
+            "updatedAt": "2025-01-19T00:00:00Z"
+        }
+    ],
+    "claims": []
+}
