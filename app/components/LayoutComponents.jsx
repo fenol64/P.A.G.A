@@ -1,27 +1,40 @@
 import Head from "next/head";
 import { humanDate } from "root/src/utils";
 
-export function Button({ label, color, size, children, ...props }) {
+export function Button({ label, className, children, ...props }) {
+    var { border, color, rounded, size, iconName, modal } = props;
     const classVar = [];
+
+    classVar.push("d-inline-flex", "flex-row", "align-items-center", "justify-content-center", "fw-bold", "text-uppercase");
+
+    // defaults
+    size = size ?? "md";
+    border = border ?? 0;
+    rounded = (rounded !== undefined && rounded !== null) ? rounded : 3;
+    color = color ? color : "secondary";
+
     classVar.push("btn");
-    classVar.push(`btn-${size ?? "md"}`);
-    classVar.push(`btn-${color ?? "secondary"}`);
+    classVar.push(`btn-${size}`);
+    classVar.push(`btn-${color}`);
+    classVar.push(`rounded-${rounded}`);
+    classVar.push(`border-${border}`);
 
-    classVar.push("d-inline-flex", "flex-row", "align-items-center", "justify-content-center", "rounded-3", "border-0", "fw-bold", "text-uppercase p-3");
+    if (className) classVar.push(className);
 
-    props.className && classVar.push(props.className);
+    if (modal) {
+        props["data-bs-toggle"] = "modal";
+        props["data-bs-target"] = modal;
+    }
 
-    const onClick = props.onClick ?? (() => { console.log("Button clicked") });
-
-    return <button type="button" className={classVar.join(" ")} onClick={onClick}>
-        {props.iconName && <i className={`${props.iconName}`}></i>}
+    return <button type="button" className={classVar.join(" ")} {...props}>
+        {iconName && <i className={`${iconName}`}></i>}
         {label && <span>{label}</span>}
         {children}
     </button>
 }
 
 export function Navbar({ pageTitle, currentPage, backLink }) {
-    return <header className="navbar navbar-dark bg-black p-0 border-bottom border-dark">
+    return <header className="navbar navbar-dark bg-black p-0 border-bottom border-dark sticky-top">
         <div className="container-fluid p-2 gap-2">
             {backLink
                 ? <Button iconName="fal fa-chevron-left" color="dark" size="lg" onClick={backLink} />
@@ -50,47 +63,7 @@ export function Container({ title, icon, description, sizeLimit, children }) {
 }
 
 export function CardCommitment({ commitment, ...props }) {
-    const classVar = [];
-    classVar.push("card", "border-0", "rounded-3", "commitment-card");
-
-    // var statusBackground = "bg-primary";
-    // // if (commitment.status === 0) statusBackground = "border-warning text-black";
-    // // else
-    // if (commitment.status === 1) statusBackground = "border-success text-white";
-    // else if (commitment.status === 2) statusBackground = "border-danger text-white";
-    // classVar.push(statusBackground);
-
-    const setCommitment = props.setCommitment ?? {};
-
-    return <>
-        <div className={classVar.join(" ")}>
-            <header className="card-header bg-transparent border-0 p-2 pb-0">
-                <div className="d-flex flex-row gap-2 align-items-center">
-                    <UserProfilePicture user={commitment.author} size="small" noStatus />
-                    <div className="d-flex flex-column gap-0 small">
-                        <p className="m-0 small fw-bold">{commitment.author.name}</p>
-                        <p className="m-0 small">{commitment.author.politicianRole}</p>
-                    </div>
-                </div>
-            </header>
-            <div className="card-body p-3">
-                <h5 className="card-title">{commitment.title}</h5>
-                <p className="card-text">{commitment.description}</p>
-
-                <p className="card-text"></p>
-                <small className="text-muted">Data de término: {humanDate(commitment.endDate)}</small>
-            </div>
-            <footer className="card-footer p-2 bg-transparent border-0">
-                <Button color="light" label="Ver detalhes" className="btn-block w-100" size="sm" onClick={() => {
-                    setCommitment(commitment);
-                }} />
-            </footer>
-            {/* <div className="card-footer d-flex flex-row gap-2 p-2 border-0 bg-transparent">
-            <Button color="danger" iconName="fal fa-thumbs-down" className="flex-fill" />
-            <Button color="success" iconName="fal fa-thumbs-up" className="flex-fill" />
-        </div> */}
-        </div>
-    </>
+    return;
 }
 
 

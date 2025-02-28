@@ -1,0 +1,47 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+#__next, main {
+    height: 100%;
+}
+
+.text-muted {
+    color: inherit !important;
+    opacity: 0.9;
+}
+
+@media (prefers-color-scheme: dark) {
+    .commitment-card {
+        background-color: var(--bs-primary);
+    }
+}
+
+@media(prefers-color-scheme: light) {
+    .commitment-card {
+        background-color: var(--bs-primary);
+    }
+}
+
+.text-overflow {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+
+.list-inline li {
+    display: inline-block;
+}
+
+.btn-opacity-light {
+    background-color: rgba(255, 255, 255, 0.35);
+    color: var(--bs-light);
+    transition: all 0.3s;
+}
+
+.btn-opacity-light:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
