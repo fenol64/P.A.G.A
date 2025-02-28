@@ -188,9 +188,17 @@ export default function HomePage({ ...props }) {
 
             const modals = document.querySelectorAll(".modal");
             modals.forEach(modal => {
+                id = modal.id;
+
                 modal.addEventListener("hidden.bs.modal", () => {
-                    setCommitment(null);
-                    setPolitician(null);
+                    if (id == "modalAuth") {
+                        setAuthCallback(null);
+                        setBackModal(null);
+                    } else if (id == "modalCommitment") {
+                        setCommitment(null);
+                    } else if (id == "modalPolitician") {
+                        setPolitician(null);
+                    }
                 });
             });
         })();
