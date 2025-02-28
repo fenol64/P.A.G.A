@@ -114,7 +114,7 @@ contract Politician {
     }
 
     // Função para obter todos os Políticos
-    function getAllPoliticians() public onlyPAGAContract view returns (PoliticianData[] memory) {
+    function getAllPoliticians() public view returns (PoliticianData[] memory) {
         uint256 totalPoliticians = PoliticianAddresses.length;
         PoliticianData[] memory allPoliticians = new PoliticianData[](totalPoliticians);
 
