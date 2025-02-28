@@ -151,7 +151,7 @@ export default function HomePage({ ...props }) {
 
             ToastMessage({ message: "Voto aplicado com sucesso!", type: "success", iconName: "fal fa-check" });
 
-            var newBalance = balance + Math.floor(Math.random() * 10) / 100;
+            var newBalance = parseFloat((balance + Math.floor(Math.random() * 10) / 100).toFixed(2));
             setBalance(newBalance);
 
             const votedCommitments = await localforage.getItem("votedCommitments");
