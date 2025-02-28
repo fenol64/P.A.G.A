@@ -19,8 +19,21 @@ export default class CommitmentController {
     async getCommitments() {
         await this.init()
         console.log("getCommitment", this.contract);
-        return await this.contract._methods.getAllCommitments().call();
+        return await this.contract.methods.getAllCommitments().call();
     }
 
+    async saveCommitment(data, commitmentID = null) {
+        await this.init();
+        const accounts = await this.provider.eth.getAccounts();
+        if (commitmentID) {
+            return await this.contract.methods.updateCommitment(commitmentID, data.title, data.description, data.image, data.endDate).send({ from: accounts[0] });
+        } else {
+            return await this.contract.methods.createCommitment(accounts[0], data.title, data.description, data.image, data.endDate).send({ from: accounts[0] });
+        }
+    }
 
+    async applyCommitmentVote(userID, commitmentID, vote) {
+        await this.init();
+        return await this.contract.methods.voteOnCommitment(commitmentID, vote).send({ from: userID });
+    }
 }
