@@ -60,21 +60,28 @@ export function humanDate(date, withTime = false) {
 export function humanDatePast(date) {
     date = new Date(date);
     const today = new Date();
-    const diff = today - date;
-    const diffSeconds = diff / 1000;
+    const diff = date - today;
+    const diffSeconds = Math.floor(Math.abs(diff) / 1000);
 
-    const diffMinutes = diffSeconds / 60;
-    const diffHours = diffMinutes / 60;
-    const diffDays = diffHours / 24;
-    const diffWeeks = diffDays / 7;
-    const diffMonths = diffDays / 30;
-    const diffYears = diffDays / 365;
+    const diffMinutes = Math.floor(diffSeconds / 60);
+    const diffHours = Math.floor(diffMinutes / 60);
+    const diffDays = Math.floor(diffHours / 24);
+    const diffWeeks = Math.floor(diffDays / 7);
+    const diffMonths = Math.floor(diffDays / 30);
+    const diffYears = Math.floor(diffDays / 365);
 
-    if (diffSeconds < 60) return "Agora";
-    else if (diffMinutes < 60) return `Há ${Math.floor(diffMinutes)} minutos`;
-    else if (diffHours < 24) return `Há ${Math.floor(diffHours)} horas`;
-    else if (diffDays < 7) return `Há ${Math.floor(diffDays)} dias`;
-    else if (diffMonths < 1) return `Há ${Math.floor(diffWeeks)} semanas`;
-    else if (diffYears < 1) return `Há ${Math.floor(diffMonths)} meses`;
-    else return `Há ${Math.floor(diffYears)} anos`;
+    const isFuture = diff > 0;
+    const prefix = isFuture ? "Em" : "Há";
+
+    var result = [prefix];
+
+    if (diffSeconds < 60) result.push(diffSeconds, diffSeconds === 1 ? "segundo" : "segundos");
+    else if (diffMinutes < 60) result.push(diffMinutes, diffMinutes === 1 ? "minuto" : "minutos");
+    else if (diffHours < 24) result.push(diffHours, diffHours === 1 ? "hora" : "horas");
+    else if (diffDays < 7) result.push(diffDays, diffDays === 1 ? "dia" : "dias");
+    else if (diffWeeks < 4) result.push(diffWeeks, diffWeeks === 1 ? "semana" : "semanas");
+    else if (diffMonths < 12) result.push(diffMonths, diffMonths === 1 ? "mês" : "meses");
+    else result.push(diffYears, diffYears === 1 ? "ano" : "anos");
+
+    return result.join(" ");
 }
