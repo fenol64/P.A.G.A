@@ -21,7 +21,9 @@ export function ToastMessage({ message, type, iconName }) {
         }
 
         const toastElement = document.createElement("div");
-        toastElement.className = `toast bg-${type} text-white`;
+        toastElement.className = `toast bg-${type}`;
+        if (type == "danger" || type == "success") toastElement.classList.add("text-white");
+        else toastElement.classList.add("text-dark");
         toastElement.onclick = () => toastElement.remove();
         toastElementContainer.appendChild(toastElement);
 
@@ -84,6 +86,9 @@ export default function HomePage({ ...props }) {
                 setUser(user_addr);
 
                 await authenticatedFeedback();
+            } else {
+                ToastMessage({ message: "MetaMask não está instalado em seu dispositivo.", type: "warning", iconName: "fal fa-exclamation-triangle" });
+
             }
         } catch (error) {
             console.error("Erro ao conectar com Metamask:", error);
@@ -99,8 +104,12 @@ export default function HomePage({ ...props }) {
             setUser(magic_data[0]);
             await authenticatedFeedback();
         } catch (error) {
-            console.error("Erro ao conectar com Magic Link:", error);
-            ToastMessage({ message: "Erro ao conectar com Magic Link.", type: "danger", iconName: "fal fa-exclamation-triangle" });
+            console.error(error.toString().includes("canceled"));
+            if (error?.toString()?.includes("canceled")) {
+                ToastMessage({ message: "Conexão com Magic Link cancelada.", type: "warning", iconName: "fal fa-exclamation-triangle" });
+            } else {
+                ToastMessage({ message: "Erro ao conectar com Magic Link.", type: "danger", iconName: "fal fa-exclamation-triangle" });
+            }
         }
     }
 
