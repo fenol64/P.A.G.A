@@ -113,7 +113,7 @@ export default function HomePage({ ...props }) {
             </header>
             <Container>
                 <hgroup className="text-center text-md-start mt-3">
-                    <h2 className="h3 text-white">Participação e Ação Governamental Ativa</h2>
+                    <h2 className="h3 text-white">Promessa Assinada Gera Atitude</h2>
                     <div className="lead text-light">
                         <p>Aqui você pode acompanhar as promessas feitas por políticos, informar se foram cumpridas.</p>
                         <p>Faça parte da mudança!</p>
