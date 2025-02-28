@@ -226,6 +226,7 @@ contract CommitmentContract {
     function getCommitmentAuthor(uint256 _commitmentId) external view returns (address) {
         return commitments[_commitmentId].author;
     }
+    
 
     // Função auxiliar para converter uint256 para string (simples)
     function uint2str(uint256 _i) private pure returns (string memory _uintAsString) {
@@ -246,5 +247,46 @@ contract CommitmentContract {
             j /= 10;
         }
         return string(bstr);
+    }
+
+
+    struct CommitmentView {
+        uint256 id;
+        address author;
+        string title;
+        string description;
+        string image;
+        CommitmentStatus status;
+        uint256 endDate;
+        uint256 createdAt;
+        uint256 updatedAt;
+        uint256 votesFor;
+        uint256 votesAgainst;
+        address[] voters;
+    }
+
+    function getAllCommitments() public view returns (CommitmentView[] memory) {
+        CommitmentView[] memory commitmentsView = new CommitmentView[](commitmentIds.length);
+
+        for (uint256 i = 0; i < commitmentIds.length; i++) {
+            Commitment storage commitment = commitments[commitmentIds[i]];
+
+            commitmentsView[i] = CommitmentView(
+                commitment.id,
+                commitment.author,
+                commitment.title,
+                commitment.description,
+                commitment.image,
+                commitment.status,
+                commitment.endDate,
+                commitment.createdAt,
+                commitment.updatedAt,
+                commitment.votesFor,
+                commitment.votesAgainst,
+                commitment.voters
+            );
+        }
+
+        return commitmentsView;
     }
 }

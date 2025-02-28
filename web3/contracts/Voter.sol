@@ -73,6 +73,10 @@ contract VoterContract {
         emit VoteRecorded(voter, _commitmentId);
     }
 
+    function getBalance (address _voter) external view returns (uint256) {
+        return voters[_voter].balance;
+    }
+
     function increaseBalances(address[] memory _voters, uint256 _amount) external onlyPAGAContract {
         for (uint256 i = 0; i < _voters.length; i++) {
             voters[_voters[i]].balance += _amount;
