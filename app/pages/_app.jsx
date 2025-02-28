@@ -40,6 +40,7 @@ export default function AppContainer({ Component, pageProps }) {
             <Head>
                 <title>P.A.G.A.</title>
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
+
             </Head>
             <MagicContext.Provider value={value}>
                 <Component {...pageProps} />

@@ -1,8 +1,23 @@
+import localforage from "localforage";
+import Web3 from "web3";
+
 export class CustomError extends Error {
     constructor(message, statusCode) {
         super(message);
         this.statusCode = statusCode;
     }
+}
+
+export const getWeb3Provider = async (magic) => {
+    if (magic && (await localforage.getItem("type") === "magic")) {
+        return new Web3(magic.rpcProvider);
+    }
+
+    if (await localforage.getItem("type") === "metamask") {
+        return new Web3(window.ethereum);
+    }
+
+    return null;
 }
 
 export const getErrorMessage = (error) => {

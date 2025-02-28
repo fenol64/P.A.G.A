@@ -3,7 +3,7 @@ import { AlertMessage, Button, CardCommitment, Container, ModalCloseButton, Navb
 
 import mock from "root/data/db.json";
 import UserController from "root/src/controllers/UserController";
-import { humanDate, humanDatePast } from "root/src/utils";
+import { getWeb3Provider, humanDate, humanDatePast } from "root/src/utils";
 import { useMagic } from "./_app";
 import localforage from "localforage";
 import CommitmentController from "root/src/controllers/CommitmentController";
@@ -30,14 +30,15 @@ export default function HomePage({ ...props }) {
         if (typeof window.ethereum !== 'undefined') {
             const user_addr = await new UserController().connectMetamask();
             await localforage.setItem('userHash', user_addr.account);
-
+            await localforage.setItem('type', 'metamask');
             setUser(user_addr);
         }
     }
 
     const magicLinkAuth = async () => {
         const magic_data = await magic.wallet.connectWithUI();
-        localforage.setItem('userHash', magic_data);
+        await localforage.setItem('userHash', magic_data);
+        await localforage.setItem('type', 'magic');
     }
 
     const checkAuth = async () => {
