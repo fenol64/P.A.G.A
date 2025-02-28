@@ -3,10 +3,10 @@
 
 import { buildModule } from "@nomicfoundation/hardhat-ignition/modules";
 
-const UserModule = buildModule("UserModule", (m) => {
-  const user = m.contract("User", [], {});
+const PoliticianModule = buildModule("PoliticianModule", (m) => {
+  const politician = m.contract("Politician", [], {});
 
-  return { user };
+  return { politician };
 });
 
-export default UserModule;
+export default PoliticianModule;
