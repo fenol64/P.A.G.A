@@ -37,7 +37,7 @@ contract VoterContract {
         _owner = msg.sender;
     }
 
-    function setPagaContract(address _PAGAContractAddress) public onlyPAGAContract {
+    function setPagaContract(address _PAGAContractAddress) public onlyOwner {
         require(_PAGAContract == address(0), "PAGA contract already set");
         _PAGAContract = _PAGAContractAddress;
     }
