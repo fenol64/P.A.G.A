@@ -56,6 +56,8 @@ export default function HomePage({ ...props }) {
     const [users, setUsers] = useState(props?.users ?? {});
     const { magic } = useMagic();
 
+    const [votedCommitments, setVotedCommitments] = useState({});
+
     const [auth_callback, setAuthCallback] = useState(null);
     const [back_modal, setBackModal] = useState(null);
 
@@ -106,7 +108,6 @@ export default function HomePage({ ...props }) {
         const userHash = await localforage.getItem("userHash");
         if (userHash) {
             setUserHash(userHash);
-            console.log("User hash", userHash);
 
             ToastMessage({ message: "Autenticado com sucesso!", type: "success", iconName: "fal fa-check" });
 
@@ -151,8 +152,17 @@ export default function HomePage({ ...props }) {
             ToastMessage({ message: "Voto aplicado com sucesso!", type: "success", iconName: "fal fa-check" });
 
             var newBalance = balance + Math.floor(Math.random() * 10) / 100;
-            await localforage.setItem("balance", newBalance);
             setBalance(newBalance);
+
+            const votedCommitments = await localforage.getItem("votedCommitments");
+            if (!votedCommitments) {
+                await localforage.setItem("votedCommitments", { [commitmentId]: vote });
+            } else {
+                await localforage.setItem("votedCommitments", { ...votedCommitments, [commitmentId]: vote });
+            }
+
+            setVotedCommitments({ ...votedCommitments, [commitmentId]: vote });
+            // openOrCloseModal("modalCommitment").close();
         } else {
             alert("Você precisa estar autenticado para votar.");
             openOrCloseModal("modalAuth").open();
@@ -171,8 +181,24 @@ export default function HomePage({ ...props }) {
             const userHash = await localforage.getItem("userHash");
             if (userHash) setUserHash(userHash);
 
+            const balance = await localforage.getItem("balance");
+            if (balance) setBalance(balance);
+            const votedCommitments = await localforage.getItem("votedCommitments");
+            if (votedCommitments) setVotedCommitments(votedCommitments);
+
+            const modals = document.querySelectorAll(".modal");
+            modals.forEach(modal => {
+                modal.addEventListener("hidden.bs.modal", () => {
+                    setCommitment(null);
+                    setPolitician(null);
+                });
+            });
         })();
     }, []);
+
+    useEffect(() => {
+        (async () => await localforage.setItem("balance", balance))();
+    }, [balance]);
 
     return <main className="">
         {/* <Navbar pageTitle="P.A.G.A." /> */}
@@ -180,9 +206,15 @@ export default function HomePage({ ...props }) {
 
         <section id="pageHeaderContainer" className="d-flex flex-column gap-3 bg-blue text-white p-3 rounded-bottom-5 pt-5">
             <header id="pageHeader" className="navbar navbar-dark bg-blue p-0 fixed-top rounded-bottom-5">
-                <Container className="">
+                <div className="container-fluid p-3 px-5">
+
                     <h1 className="navbar-brand m-0 fw-bold">PAGA</h1>
-                </Container>
+
+                    {userHash && <div className="d-flex flex-row gap-3 align-items-center ms-auto">
+                        <span className="badge bg-green fs-6"><i className="fal fa-coins me-1" /> {balance ?? 0} PC</span>
+                        <Button color="danger" iconName="fal fa-sign-out" size="md" rounded="2" onClick={logoutFeedback} />
+                    </div>}
+                </div>
             </header>
 
             <Container>
@@ -208,7 +240,6 @@ export default function HomePage({ ...props }) {
                 {userHash
                     ? <div className="d-flex flex-column gap-3 align-items-center">
                         <h3 className="text-center">Você está autenticado em crypto!</h3>
-                        <p>Seu saldo: <span className="badge bg-green fs-6"><i className="fal fa-coins me-1" /> {balance ?? 0} PC</span></p>
                         <Button color="danger" label="Desconectar" iconName="fal fa-sign-out" className="btn-block w-100" size="lg" rounded="pill p-3" onClick={logoutFeedback} />
                     </div>
                     : <Button color="light" label="Entrar para votar" iconName="fal fa-fingerprint" className="btn-block w-100" size="lg" rounded="pill p-3" modal="#modalAuth" />
@@ -285,7 +316,7 @@ export default function HomePage({ ...props }) {
                 </div>
             </Container>
 
-            <section id="modalCommitment" className="modal fade">
+            <section id="modalCommitment" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1">
                 <div className="modal-dialog modal-lg modal-dialog-scrollable modal-fullscreen-sm-down">
                     <div className="modal-content">
                         {commitment && <>
@@ -329,11 +360,16 @@ export default function HomePage({ ...props }) {
 
                             {userHash
                                 ? <footer className="modal-footer border-0 text-center">
-                                    <h3 className="w-100 text-center">A promessa foi cumprida?</h3>
-                                    <div className="d-flex flex-row gap-3 w-100 align-items-center justify-content-center p-3">
-                                        <Button color="danger" iconName="fal fa-thumbs-down fa-2x" size="lg" rounded="pill p-4" onClick={() => applyVote(commitment.id, false)} />
-                                        <Button color="success" iconName="fal fa-thumbs-up fa-2x" size="lg" rounded="pill p-4" onClick={() => applyVote(commitment.id, true)} />
-                                    </div>
+                                    {votedCommitments[commitment.id] !== undefined
+                                        ? <div className="w-100"><AlertMessage type={`${votedCommitments[commitment.id] == 1 ? "success" : "warning"} text-center justify`} message={`Você já votou nesta promessa como ${votedCommitments[commitment.id] == 1 ? "Promessa cumprida" : "Promessa não cumprida"}`} iconName="fal fa-info-circle" /></div>
+                                        : <>
+                                            <h3 className="w-100 text-center">A promessa foi cumprida?</h3>
+                                            <div className="d-flex flex-row gap-3 w-100 align-items-center justify-content-center p-3">
+                                                <Button color="danger" iconName="fal fa-thumbs-down fa-2x" size="lg" rounded="pill p-4" onClick={() => applyVote(commitment.id, false)} />
+                                                <Button color="success" iconName="fal fa-thumbs-up fa-2x" size="lg" rounded="pill p-4" onClick={() => applyVote(commitment.id, true)} />
+                                            </div>
+                                        </>
+                                    }
                                 </footer>
                                 : <footer className="modal-footer border-0 text-center">
                                     <Button color="light" label="Entrar para votar" iconName="fal fa-fingerprint" className="btn-block w-100" border="2" size="lg" rounded="pill p-3" modal="#modalAuth" />
@@ -344,7 +380,7 @@ export default function HomePage({ ...props }) {
                 </div>
             </section>
 
-            <section id="modalPolitician" className="modal fade">
+            <section id="modalPolitician" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1">
                 <div className="modal-dialog modal-lg modal-dialog-scrollable modal-fullscreen-sm-down">
                     <div className="modal-content">
                         {politician && <>
@@ -394,7 +430,7 @@ export default function HomePage({ ...props }) {
             </section>
         </section>
 
-        <section id="modalAuth" className="modal fade">
+        <section id="modalAuth" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1">
             <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content">
                     <header className="modal-header bg-transparent border-0 p-2">
