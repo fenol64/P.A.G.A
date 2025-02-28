@@ -114,14 +114,23 @@ export default function HomePage({ ...props }) {
             if (commitment) openOrCloseModal("modalCommitment").open();
             if (politician) openOrCloseModal("modalPolitician").open();
 
+            const balance = await localforage.getItem("balance");
+            if (balance) setBalance(balance);
+            const votedCommitments = await localforage.getItem("votedCommitments");
+            if (votedCommitments) setVotedCommitments(votedCommitments);
+
             openOrCloseModal("modalAuth").close();
         }
     }
 
     const logoutFeedback = async () => {
+
         await localforage.removeItem("userHash");
         setUserHash(null);
         setUser(null);
+
+        setBalance(0);
+        setVotedCommitments({});
 
         ToastMessage({ message: "Desconectado com sucesso!", type: "info", iconName: "fal fa-check" });
     }
@@ -181,14 +190,15 @@ export default function HomePage({ ...props }) {
             const userHash = await localforage.getItem("userHash");
             if (userHash) setUserHash(userHash);
 
-            const balance = await localforage.getItem("balance");
-            if (balance) setBalance(balance);
-            const votedCommitments = await localforage.getItem("votedCommitments");
-            if (votedCommitments) setVotedCommitments(votedCommitments);
-
+            if (userHash) {
+                const balance = await localforage.getItem("balance");
+                if (balance) setBalance(balance);
+                const votedCommitments = await localforage.getItem("votedCommitments");
+                if (votedCommitments) setVotedCommitments(votedCommitments);
+            }
             const modals = document.querySelectorAll(".modal");
             modals.forEach(modal => {
-                id = modal.id;
+                var id = modal.id;
 
                 modal.addEventListener("hidden.bs.modal", () => {
                     if (id == "modalAuth") {
