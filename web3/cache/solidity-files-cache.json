@@ -1,10 +1,10 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/home/fenol/P.A.G.A/web3/contracts/Lock.sol": {
-      "lastModificationDate": 1740690289414,
-      "contentHash": "7eee587c347fe6b1de50c96688cb9477",
-      "sourceName": "contracts/Lock.sol",
+    "/home/fenol/P.A.G.A/web3/contracts/Claim.sol": {
+      "lastModificationDate": 1740728773251,
+      "contentHash": "7cfc8e0db8b4c23e5c0e90af7e7cee6e",
+      "sourceName": "contracts/Claim.sol",
       "solcConfig": {
         "version": "0.8.28",
         "settings": {
@@ -34,13 +34,54 @@
         "^0.8.28"
       ],
       "artifacts": [
-        "Lock"
+        "ClaimContract"
       ]
     },
-    "/home/fenol/P.A.G.A/web3/contracts/User.sol": {
-      "lastModificationDate": 1740690289414,
-      "contentHash": "33dee5557361efb755237690dfd69154",
-      "sourceName": "contracts/User.sol",
+    "/home/fenol/P.A.G.A/web3/contracts/PAGA.sol": {
+      "lastModificationDate": 1740728773251,
+      "contentHash": "5b7f2bd7ca8c4f08ce7ea2d0b4debf74",
+      "sourceName": "contracts/PAGA.sol",
+      "solcConfig": {
+        "version": "0.8.28",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./Voter.sol",
+        "./Commitment.sol",
+        "./Politician.sol",
+        "./Claim.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.28"
+      ],
+      "artifacts": [
+        "PAGAContract"
+      ]
+    },
+    "/home/fenol/P.A.G.A/web3/contracts/Voter.sol": {
+      "lastModificationDate": 1740728773251,
+      "contentHash": "198f2e410d203713c255a90d3bb1032b",
+      "sourceName": "contracts/Voter.sol",
       "solcConfig": {
         "version": "0.8.28",
         "settings": {
@@ -70,7 +111,79 @@
         "^0.8.28"
       ],
       "artifacts": [
-        "User"
+        "VoterContract"
+      ]
+    },
+    "/home/fenol/P.A.G.A/web3/contracts/Commitment.sol": {
+      "lastModificationDate": 1740728773251,
+      "contentHash": "cc141db356166c8a13bfcb7a5b487003",
+      "sourceName": "contracts/Commitment.sol",
+      "solcConfig": {
+        "version": "0.8.28",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.28"
+      ],
+      "artifacts": [
+        "CommitmentContract"
+      ]
+    },
+    "/home/fenol/P.A.G.A/web3/contracts/Politician.sol": {
+      "lastModificationDate": 1740724537831,
+      "contentHash": "ecb8deb80233fc9107f1e35b00735e29",
+      "sourceName": "contracts/Politician.sol",
+      "solcConfig": {
+        "version": "0.8.28",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.28"
+      ],
+      "artifacts": [
+        "Politician"
       ]
     }
   }
