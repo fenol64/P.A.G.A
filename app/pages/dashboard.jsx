@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { AlertMessage, UserProfilePicture } from "root/components/LayoutComponents";
-import UserController from "root/src/controllers/UserController";
-import { Api } from "root/src/services";
+import mainController from "root/src/controllers/mainController";
 
 
 
@@ -14,7 +13,7 @@ export default function HomePage({ ...props }) {
         setLoading(true);
         setUsers([]);
         try {
-            const userController = new UserController();
+            const userController = new mainController();
             const getUsers = await userController.getUsers(user_addr);
 
             console.log("Usuários carregados:", getUsers);
