@@ -51,7 +51,7 @@ export function ToastMessage({ message, type, iconName }) {
 
 export default function HomePage({ ...props }) {
     const [user, setUser] = useState(null);
-    const [balance, setBalance] = useState(0);
+    const [balance, setBalance] = useState(null);
     const [userHash, setUserHash] = useState(null);
     const [users, setUsers] = useState(props?.users ?? {});
     const { magic } = useMagic();
@@ -197,7 +197,7 @@ export default function HomePage({ ...props }) {
     }, []);
 
     useEffect(() => {
-        (async () => await localforage.setItem("balance", balance))();
+        if (balance !== null) (async () => await localforage.setItem("balance", balance))();
     }, [balance]);
 
     return <main className="">
@@ -240,7 +240,6 @@ export default function HomePage({ ...props }) {
                 {userHash
                     ? <div className="d-flex flex-column gap-3 align-items-center">
                         <h3 className="text-center">Você está autenticado em crypto!</h3>
-                        <Button color="danger" label="Desconectar" iconName="fal fa-sign-out" className="btn-block w-100" size="lg" rounded="pill p-3" onClick={logoutFeedback} />
                     </div>
                     : <Button color="light" label="Entrar para votar" iconName="fal fa-fingerprint" className="btn-block w-100" size="lg" rounded="pill p-3" modal="#modalAuth" />
                 }
@@ -296,6 +295,7 @@ export default function HomePage({ ...props }) {
                                                 <p className="m-0 small">{commitment.author.politicianRole}</p>
                                             </div>
                                         </div>
+                                        <p className="m-0 text-muted small p-2">{votedCommitments[commitment.id] !== undefined ? (votedCommitments[commitment.id] == 1 ? <i className="fas fa-thumbs-up fa-2x text-light" /> : <i className="fas fa-thumbs-down fa-2x text-danger" />) : ""}</p>
                                     </header>
 
                                     <div className="card-body p-3">
