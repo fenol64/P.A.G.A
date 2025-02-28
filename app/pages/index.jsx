@@ -41,7 +41,6 @@ export function ToastMessage({ message, type, iconName }) {
         });
         toastElement.addEventListener("hidden.bs.toast", () => {
             toastElement.remove();
-            toastElementContainer.remove();
         });
 
         return toastElement;
