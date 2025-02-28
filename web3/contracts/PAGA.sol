@@ -4,6 +4,7 @@ pragma solidity ^0.8.28;
 import "./Voter.sol";
 import "./Commitment.sol";
 import "./Politician.sol";
+import "./Claim.sol";
 
 contract PAGAContract {
 
@@ -11,20 +12,23 @@ contract PAGAContract {
     VoterContract public voterContract;
     CommitmentContract public commitmentContract;
     Politician public politicianContract;
-
-    constructor(address _voterContract, address _commitmentContract, address _politicianContract) {
+    ClaimContract public claimContract;
+    
+    constructor(address _voterContract, address _commitmentContract, address _politicianContract, address _claimContract) {
         _owner = msg.sender;
         voterContract = VoterContract(_voterContract);
         commitmentContract = CommitmentContract(_commitmentContract);
         politicianContract = Politician(_politicianContract);
+        claimContract = ClaimContract(_claimContract);
         voterContract.setPagaContract(address(this));
         commitmentContract.setPagaContract(address(this));
         politicianContract.setPagaContract(address(this));
+        claimContract.setPagaContract(address(this));
     }
 
     modifier onlyOwner() {
         require(msg.sender == _owner, "Caller is not the owner");
-        _;
+        _; 
     }
 
     function createPolitician(
@@ -62,10 +66,19 @@ contract PAGAContract {
         uint256[] memory commitments = commitmentContract.executeDailyJob();
         politicianContract.increaseBalances(commitmentContract.getSuccessfulCommitmentAuthors(commitments), 1);
         for (uint i = 0; i < commitments.length; i++) {
-            voterContract.increaseBalances(commitmentContract.getVotersByVote(commitments[i],
+            voterContract.increaseBalances(commitmentContract.getVotersByVote(commitments[i], 
                 commitmentContract.getCommitmentStatusBool(commitments[i])), 1);
         }
     }
 
+    function createClaim(
+        address toPolitician,
+        string memory _title,
+        string memory _description,
+        string memory _coverPictureURI,
+        uint _investment
+    ) public {
+        claimContract.createClaim(msg.sender, toPolitician, _title, _description, _coverPictureURI, _investment);
+    }
 
 }
