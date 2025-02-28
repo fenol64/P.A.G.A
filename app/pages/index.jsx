@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { AlertMessage, Button, CardCommitment, Container, ModalCloseButton, Navbar, UserProfilePicture } from "root/components/LayoutComponents";
 
 import mock from "root/data/db.json";
-import {  humanDate, humanDatePast } from "root/src/utils";
+import { humanDate, humanDatePast } from "root/src/utils";
 import { useMagic } from "./_app";
 import localforage from "localforage";
 import CommitmentController from "root/src/controllers/CommitmentController";
@@ -12,20 +12,22 @@ export function ToastMessage({ message, type, iconName }) {
     try {
         const bodyElement = document.querySelector("body");
 
-        const toastElementContainer = document.createElement("div");
-        toastElementContainer.className = "toast-container position-fixed bottom-0 end-0 p-3";
-        bodyElement.appendChild(toastElementContainer);
+        var toastElementContainer = document.querySelector(".toast-container");
+        if (!toastElementContainer) {
+            toastElementContainer = document.createElement("div");
+            toastElementContainer.className = "toast-container position-fixed bottom-0 end-0 p-3";
+            bodyElement.appendChild(toastElementContainer);
+        }
 
         const toastElement = document.createElement("div");
-        toastElement.className = `toast bg-${type} text-white rounded-5`;
+        toastElement.className = `toast bg-${type} text-white`;
         toastElement.onclick = () => toastElement.remove();
         toastElementContainer.appendChild(toastElement);
 
         toastElement.innerHTML = `
-            <div class="toast-header">
+            <div class="d-flex flex-row gap-2 align-items-center p-3">
                 <i class="${iconName} me-2"></i>
                 <strong class="me-auto">${message}</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
         `;
         const toast = new bootstrap.Toast(toastElement);
@@ -81,7 +83,7 @@ export default function HomePage({ ...props }) {
 
 
 
-            console.log({commitments_data: await commitments.getCommitments()});
+            console.log({ commitments_data: await commitments.getCommitments() });
         }
     }
 
@@ -99,7 +101,7 @@ export default function HomePage({ ...props }) {
             setUserHash(userHash);
             console.log("User hash", userHash);
 
-            alert("Autenticado com sucesso!");
+            ToastMessage({ message: "Autenticado com sucesso!", type: "success", iconName: "fal fa-check" });
 
             if (commitment) openOrCloseModal("modalCommitment").open();
             if (politician) openOrCloseModal("modalPolitician").open();
@@ -128,7 +130,11 @@ export default function HomePage({ ...props }) {
                 return;
             }
 
+            ToastMessage({ message: "Voto aplicado com sucesso!", type: "success", iconName: "fal fa-check" });
 
+            var newBalance = balance + Math.floor(Math.random() * 10) / 100;
+            await localforage.setItem("balance", newBalance);
+            setBalance(newBalance);
         } else {
             alert("Você precisa estar autenticado para votar.");
             openOrCloseModal("modalAuth").open();
