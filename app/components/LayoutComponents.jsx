@@ -5,7 +5,7 @@ export function Button({ label, className, children, ...props }) {
     var { border, color, rounded, size, iconName, modal } = props;
     const classVar = [];
 
-    classVar.push("d-inline-flex", "flex-row", "align-items-center", "justify-content-center", "fw-bold", "text-uppercase");
+    classVar.push("d-inline-flex", "flex-row", "gap-2", "align-items-center", "justify-content-center", "fw-bold", "text-uppercase");
 
     // defaults
     size = size ?? "md";
@@ -33,17 +33,28 @@ export function Button({ label, className, children, ...props }) {
     </button>
 }
 
+export function ModalCloseButton({ target, dismiss, ...props }) {
+    if (target) {
+        props["data-bs-toggle"] = "modal";
+        props["data-bs-target"] = target;
+    } else if (dismiss) {
+        props["data-bs-dismiss"] = "modal";
+    }
+
+    return <Button color="transparent" iconName="fal fa-times" className={"position-absolute end-0 top-0 m-2"} {...props} />
+}
+
 export function Navbar({ pageTitle, currentPage, backLink }) {
-    return <header className="navbar navbar-dark bg-black p-0 border-bottom border-dark sticky-top">
-        <div className="container-fluid p-2 gap-2">
-            {backLink
-                ? <Button iconName="fal fa-chevron-left" color="dark" size="lg" onClick={backLink} />
-                : <Button iconName="fal fa-home" color="transparent text-black" size="lg" />
-            }
-            <h1 className="navbar-brand my-0 mx-auto">{pageTitle ?? "P.A.G.A"}</h1>
-            <Button iconName="fal fa-user" color="dark" size="lg" />
-        </div>
-    </header>
+    return <>
+        <Head>
+            <title>{pageTitle ?? "P.A.G.A."}</title>
+        </Head>
+        <header className="navbar navbar-dark bg-green p-0 border-0 shadow-sm sticky-top">
+            <div className="container-fluid p-2 gap-2">
+                <h1 className="navbar-brand my-0 mx-auto">{pageTitle ?? "P.A.G.A."}</h1>
+            </div>
+        </header>
+    </>
 }
 
 export function Container({ title, icon, description, sizeLimit, children }) {
@@ -70,10 +81,10 @@ export function CardCommitment({ commitment, ...props }) {
 
 export const UserProfilePicture = ({ user, size, ...props }) => {
     const sizes = {
-        small: "2rem",
-        medium: "4rem",
-        large: "6rem",
-        xlarge: "8rem"
+        sm: "2.5rem",
+        md: "4.5rem",
+        lg: "6rem",
+        xl: "8rem"
     }
 
     var styles = { width: sizes.medium, height: sizes.medium, objectFit: "cover" };
@@ -81,15 +92,9 @@ export const UserProfilePicture = ({ user, size, ...props }) => {
     if (size) styles = { ...styles, width: sizes[size], height: sizes[size] };
 
     var classVar = [];
-    classVar.push("rounded-circle border-2");
-    if (user.popularity < 0.5) classVar.push("border-danger");
-    else if (user.popularity < 0.75) classVar.push("border-warning");
-    else if (user.popularity >= 0.75) classVar.push("border-success");
-    else classVar.push("border-primary");
+    classVar.push("rounded-circle", "border", "border-1");
 
-    if (props.noStatus) classVar.push("border-0");
-
-    return <img src={user.profilePictureURI} alt={user.name} className={`rounded-circle ${classVar.join(" ")}`} style={styles} />
+    return <img src={user.profilePictureURI} alt={user.name} className={`${classVar.join(" ")}`} style={styles} />
 }
 
 export const AlertMessage = ({ type, message, iconName, ...props }) => {

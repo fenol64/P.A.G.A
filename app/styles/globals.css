@@ -1,3 +1,9 @@
+:root {
+    --blue: #012169;
+    --green: #009739;
+    --yellow: #fedd00;
+}
+
 html, body {
     margin: 0;
     padding: 0;
@@ -44,4 +50,16 @@ html, body {
 
 .btn-opacity-light:hover {
     background-color: rgba(255, 255, 255, 0.5);
+}
+
+.bg-blue {
+    background-color: var(--blue);
+}
+
+.bg-green {
+    background-color: var(--green);
+}
+
+.bg-yellow {
+    background-color: var(--yellow);
 }
