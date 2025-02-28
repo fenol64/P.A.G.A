@@ -4,7 +4,7 @@ import UserAbi from "./web3/contracts/artifacts/User.abi.json";
 
 export default class UserController {
 
-    contract_addr = "0xaE036c65C649172b43ef7156b009c6221B596B8b"
+    contract_addr = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512"
 
     constructor() {
         return this;
