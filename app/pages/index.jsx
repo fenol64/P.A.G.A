@@ -28,12 +28,14 @@ export default function HomePage({ ...props }) {
         if (typeof window.ethereum !== 'undefined') {
             const user_addr = await new UserController().connectMetamask();
             localforage.setItem('token', user_addr.account);
+            localforage.setItem('type', 'metamask');
         }
     }
 
     const magicLinkAuth = async () => {
         const magic_data = await magic.wallet.connectWithUI();
         localforage.setItem('token', magic_data);
+        localforage.setItem('type', 'magic');
     }
 
     useEffect(() => {
