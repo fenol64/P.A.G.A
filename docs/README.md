@@ -1,6 +1,6 @@
 # P.A.G.A. – Promessa Assinada Gera Atitude
 
-![P.A.G.A. Logo](https://example.com/logo.png)
+![P.A.G.A. Logo](./mnt/data/paga-logo.jpg)
 
 ## Introdução
 
