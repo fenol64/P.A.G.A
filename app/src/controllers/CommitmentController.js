@@ -16,33 +16,10 @@ export default class CommitmentController {
         return this;
     }
 
-    async connectMetamask() {
-        if (window.ethereum) {
-            try {
-              // Solicita acesso à carteira do usuário
-              const accounts = await window.ethereum.request({
-                method: "eth_requestAccounts",
-              });
-
-              // Cria uma instância do Web3
-              this.provider = new Web3(window.ethereum);
-
-              console.log("Conta conectada:", accounts[0]);
-
-              return { account: accounts[0] };
-            } catch (error) {
-              console.error("Erro ao conectar à MetaMask:", error);
-            }
-          } else {
-            console.error("MetaMask não está instalada!");
-          }
-    }
-
-
-    async getCommitment() {
+    async getCommitments() {
         await this.init()
         console.log("getCommitment", this.contract);
-        return await this.contract.methods.getAllCommitments();
+        return await this.contract._methods.getAllCommitments().call();
     }
 
 
