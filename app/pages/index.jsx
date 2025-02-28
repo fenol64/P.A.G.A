@@ -34,27 +34,11 @@ export default function HomePage({ ...props }) {
     const metaMaskAuth = async () => {
         if (typeof window.ethereum !== 'undefined') {
             const maincontroller = await new mainController();
-            maincontroller.init();
+            await maincontroller.init();
             const user_addr = await maincontroller.connectMetamask();
             await localforage.setItem('userHash', user_addr.account);
             await localforage.setItem('type', 'metamask');
             setUser(user_addr);
-
-            const commitments = await new CommitmentController().init();
-            console.log("commitments");
-            console.log({commitments_data: await commitments.getCommitments()});
-            console.log("saveCommitment");
-            console.log({commitments_data: await commitments.saveCommitment({title: "Teste", description: "Teste", image: "Teste", endDate: "2022-12-31"})});
-            console.log("applyCommitmentVote");
-            console.log({commitments_data: await commitments.applyCommitmentVote(user_addr.account, 1, true)});
-
-            const politicians = await new PoliticianController().init();
-            console.log("politicians");
-            console.log({politicians_data: await politicians.getPoliticians()});
-            console.log("savePolitician");
-            console.log({politicians_data: await politicians.savePolitician({name: "Teste", role: "Teste", image: "Teste"})});
-            console.log("applyCommitmentVote");
-            console.log({politicians_data: await politicians.applyCommitmentVote(user_addr.account, 1, true)});
         }
     }
 

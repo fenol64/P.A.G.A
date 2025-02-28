@@ -63,5 +63,25 @@ export default class mainController {
         }
     }
 
+    async createPolitician(
+        _profilePictureURI,
+        _politicianParty,
+        _name,
+        _politicianRole,
+
+    ) {
+        try {
+            const result = await this.contract.methods.createPolitician(
+                _profilePictureURI,
+                _politicianParty,
+                _name,
+                _politicianRole
+            ).call();
+            return result;
+        } catch (error) {
+            console.error("Erro ao criar usuário:", error);
+        }
+    }
+
 
 }

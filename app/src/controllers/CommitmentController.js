@@ -28,7 +28,7 @@ export default class CommitmentController {
         if (commitmentID) {
             return await this.contract.methods.updateCommitment(commitmentID, data.title, data.description, data.image, data.endDate).send({ from: accounts[0] });
         } else {
-            return await this.contract.methods.createCommitment(accounts[0], data.title, data.description, data.image, data.endDate).send({ from: accounts[0] });
+            return await this.contract.methods.createPolitician(accounts[0], data.title, data.description, data.image, data.endDate).send({ from: accounts[0] });
         }
     }
 
