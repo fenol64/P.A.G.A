@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { AlertMessage, Button, CardCommitment, Container, ModalCloseButton, Navbar, UserProfilePicture } from "root/components/LayoutComponents";
 
 import mock from "root/data/db.json";
-import UserController from "root/src/controllers/UserController";
-import { humanDate, humanDatePast } from "root/src/utils";
+import {  humanDate, humanDatePast } from "root/src/utils";
 import { useMagic } from "./_app";
 import localforage from "localforage";
 import CommitmentController from "root/src/controllers/CommitmentController";
+import mainController from "root/src/controllers/mainController";
 
 export function ToastMessage({ message, type, iconName }) {
     try {
@@ -69,12 +69,19 @@ export default function HomePage({ ...props }) {
     }
 
     const metaMaskAuth = async () => {
-        if (typeof window.ethereum !== "undefined") {
-            const user_addr = await new UserController().connectMetamask();
-            await localforage.setItem("userHash", user_addr.account);
-
+        if (typeof window.ethereum !== 'undefined') {
+            const maincontroller = await new mainController();
+            maincontroller.init();
+            const user_addr = await maincontroller.connectMetamask();
+            await localforage.setItem('userHash', user_addr.account);
+            await localforage.setItem('type', 'metamask');
             setUser(user_addr);
-            await authenticatedFeedback();
+
+            const commitments = await new CommitmentController().init();
+
+
+
+            console.log({commitments_data: await commitments.getCommitments()});
         }
     }
 
@@ -152,7 +159,7 @@ export default function HomePage({ ...props }) {
 
             <Container>
                 <hgroup className="text-center text-md-start mt-3">
-                    <h2 className="h3 text-white">Participação e Ação Governamental Ativa</h2>
+                    <h2 className="h3 text-white">Promessa Assinada Gera Atitude</h2>
                     <div className="lead text-light">
                         <p>Aqui você pode acompanhar as promessas feitas por políticos, informar se foram cumpridas.</p>
                         <p>Faça parte da mudança!</p>

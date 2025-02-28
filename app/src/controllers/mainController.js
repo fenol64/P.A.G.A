@@ -1,18 +1,17 @@
-import { ethers } from "ethers";
 import Web3 from "web3";
-import UserAbi from "./web3/contracts/artifacts/User.abi.json";
+import mainJSON from "../contracts/PAGA.sol/PAGAContract.json";
 
-export default class UserController {
+export default class mainController {
 
-    contract_addr = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+    contract_addr = "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9"
 
     constructor() {
         return this;
     }
 
     async init() {
-        await this.connect();
-        this.contract = new this.provider.eth.Contract(UserAbi.abi, this.contract_addr);
+        await this.connectMetamask();
+        this.contract = new this.provider.eth.Contract(mainJSON.abi, this.contract_addr);
         return this;
     }
 
@@ -25,13 +24,13 @@ export default class UserController {
               });
 
               // Cria uma instância do Web3
-              const web3 = new Web3(window.ethereum);
+              this.provider = new Web3(window.ethereum);
 
               console.log("Conta conectada:", accounts[0]);
 
               return { web3, account: accounts[0] };
             } catch (error) {
-              return { error: error };
+              console.error("Erro ao conectar à MetaMask:", error);
             }
           } else {
             console.error("MetaMask não está instalada!");
@@ -54,4 +53,15 @@ export default class UserController {
             console.error("Erro ao buscar usuário:", error);
         }
     }
+
+    async createVoter() {
+        try {
+            const result = await this.contract.methods.createVoter().call();
+            return result;
+        } catch (error) {
+            console.error("Erro ao criar usuário:", error);
+        }
+    }
+
+
 }
