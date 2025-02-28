@@ -77,3 +77,36 @@ Se você deseja apoiar, contribuir com código ou se tornar um parceiro, entre e
 Vamos juntos construir um futuro mais transparente e participativo!
 
 
+## Parte técnica do projeto
+
+### Estrutura do projeto
+
+```
+    app/               # Frontend
+    docs/              # Documentação
+    infra/             # Infraestrutura e containers
+    web3/              # Contratos inteligentes e o hardhat para subir o nó
+```
+
+### Instalação
+
+pré-requisitos:
+    - docker
+
+Para rodar o projeto localmente só executar o comando:
+
+```bash
+make
+```
+
+### Tecnologias utilizadas
+
+- **Solidity**: Linguagem de programação para contratos inteligentes.
+- **Hardhat**: Framework para desenvolvimento de contratos inteligentes.
+- **Web3js**: Biblioteca para interação com contratos inteligentes.
+- **Next.js**: Biblioteca para desenvolvimento de interfaces.
+
+
+### e como tudo se conecta?
+
+A aplicação web3 se conecta com a blockchain através do contrato inteligente, que é a camada intermediária entre a aplicação e a blockchain. O contrato inteligente é responsável por armazenar as promessas eleitorais e distribuir os tokens. A aplicação web3 se conecta com o contrato inteligente através da biblioteca web3js, que permite a interação com a blockchain.
