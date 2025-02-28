@@ -72,22 +72,34 @@ export default function HomePage({ ...props }) {
     }
 
     const metaMaskAuth = async () => {
-        if (typeof window.ethereum !== 'undefined') {
-            const maincontroller = await new mainController();
-            await maincontroller.init();
-            const user_addr = await maincontroller.connectMetamask();
-            await localforage.setItem('userHash', user_addr.account);
-            await localforage.setItem('type', 'metamask');
-            setUser(user_addr);
+        try {
+            if (typeof window.ethereum !== 'undefined') {
+                const maincontroller = await new mainController();
+                await maincontroller.init();
+                const user_addr = await maincontroller.connectMetamask();
+                await localforage.setItem('userHash', user_addr.account);
+                await localforage.setItem('type', 'metamask');
+                setUser(user_addr);
+
+                await authenticatedFeedback();
+            }
+        } catch (error) {
+            console.error("Erro ao conectar com Metamask:", error);
+            ToastMessage({ message: "Erro ao conectar com Metamask.", type: "danger", iconName: "fal fa-exclamation-triangle" });
         }
     }
 
     const magicLinkAuth = async () => {
-        const magic_data = await magic.wallet.connectWithUI();
-        localforage.setItem("userHash", magic_data);
+        try {
+            const magic_data = await magic.wallet.connectWithUI();
+            await localforage.setItem("userHash", magic_data[0]);
 
-        setUser(magic_data);
-        await authenticatedFeedback();
+            setUser(magic_data[0]);
+            await authenticatedFeedback();
+        } catch (error) {
+            console.error("Erro ao conectar com Magic Link:", error);
+            ToastMessage({ message: "Erro ao conectar com Magic Link.", type: "danger", iconName: "fal fa-exclamation-triangle" });
+        }
     }
 
     const authenticatedFeedback = async () => {
@@ -105,6 +117,14 @@ export default function HomePage({ ...props }) {
         }
     }
 
+    const logoutFeedback = async () => {
+        await localforage.removeItem("userHash");
+        setUserHash(null);
+        setUser(null);
+
+        ToastMessage({ message: "Desconectado com sucesso!", type: "info", iconName: "fal fa-check" });
+    }
+
     const openOrCloseModal = (modalId) => {
         const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById(modalId));
         return {
@@ -117,8 +137,11 @@ export default function HomePage({ ...props }) {
         console.log("Applying vote to commitment", commitmentId, vote);
         const userHash = await localforage.getItem("userHash");
         if (userHash) {
-            const res = await new CommitmentController().applyVote(userHash, commitmentId, vote);
-            console.log(res);
+            vote = vote ? "1" : "0";
+            // const res = await new CommitmentController().applyCommitmentVote(userHash, commitmentId, vote);
+            // console.log("Vote applied", res);
+
+            const res = {};
 
             if (res?.error) {
                 alert("Erro ao votar na promessa.");
@@ -139,11 +162,15 @@ export default function HomePage({ ...props }) {
 
     useEffect(() => {
         (async () => {
+            // const Web3Commitments = await new CommitmentController();
+            // await Web3Commitments.init();
+            // const commitments = await Web3Commitments.getCommitments();
+
+            // console.log("Commitments", commitments);
+
             const userHash = await localforage.getItem("userHash");
-            if (userHash) {
-                setUserHash(userHash);
-                console.log("User hash", userHash);
-            }
+            if (userHash) setUserHash(userHash);
+
         })();
     }, []);
 
@@ -167,12 +194,11 @@ export default function HomePage({ ...props }) {
                     </div>
                 </hgroup>
 
-                <Button color="primary" onClick={() => ToastMessage({ message: "Teste", type: "success", iconName: "fal fa-check" })} label="Testar Toast" />
-
                 <div className="d-flex flex-column gap-0 align-items-center">
                     <span className="d-block text-center text-dark rounded-top-pill bg-light pt-3 px-4">
                         <i className="fal fa-lock fa-3x"></i>
                     </span>
+
                     <div className="bg-light text-dark rounded-5 p-4">
                         <p>Utilizamos a <b>tecnologia blockchain</b> para garantir a <b>transparência e segurança</b> dos dados. Desta forma, cada voto e promessa é único e imutável.</p>
                         <p>E para votar e comentar é necessário autenticar-se.</p>
@@ -183,10 +209,7 @@ export default function HomePage({ ...props }) {
                     ? <div className="d-flex flex-column gap-3 align-items-center">
                         <h3 className="text-center">Você está autenticado em crypto!</h3>
                         <p>Seu saldo: <span className="badge bg-green fs-6"><i className="fal fa-coins me-1" /> {balance ?? 0} PC</span></p>
-                        <Button color="danger" label="Desconectar" iconName="fal fa-sign-out" className="btn-block w-100" size="lg" rounded="pill p-3" onClick={async () => {
-                            await localforage.removeItem("userHash");
-                            setUserHash(null);
-                        }} />
+                        <Button color="danger" label="Desconectar" iconName="fal fa-sign-out" className="btn-block w-100" size="lg" rounded="pill p-3" onClick={logoutFeedback} />
                     </div>
                     : <Button color="light" label="Entrar para votar" iconName="fal fa-fingerprint" className="btn-block w-100" size="lg" rounded="pill p-3" modal="#modalAuth" />
                 }

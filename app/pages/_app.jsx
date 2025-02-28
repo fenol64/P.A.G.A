@@ -5,7 +5,7 @@ import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 const MagicContext = createContext({
     magic: null,
-  });
+});
 
 export const useMagic = () => useContext(MagicContext)
 
@@ -15,32 +15,28 @@ export default function AppContainer({ Component, pageProps }) {
 
     const value = useMemo(() => {
         return {
-          magic,
+            magic,
         };
-      }, [magic]);
+    }, [magic]);
 
     useEffect(() => {
-        console.log("NEXT_PUBLIC_MAGIC_API_KEY", process.env.NEXT_PUBLIC_MAGIC_API_KEY);
-        console.log("NEXT_PUBLIC_RPC_URL", process.env.NEXT_PUBLIC_RPC_URL);
-        console.log("NEXT_PUBLIC_CHAIN_ID", process.env.NEXT_PUBLIC_CHAIN_ID);
         if (process.env.NEXT_PUBLIC_MAGIC_API_KEY) {
-          const magic = new MagicBase(process.env.NEXT_PUBLIC_MAGIC_API_KEY, {
-            network: {
-              rpcUrl: process.env.NEXT_PUBLIC_RPC_URL,
-              chainId: process.env.NEXT_PUBLIC_CHAIN_ID,
-            },
-          });
+            const magic = new MagicBase(process.env.NEXT_PUBLIC_MAGIC_API_KEY, {
+                network: {
+                    rpcUrl: process.env.NEXT_PUBLIC_RPC_URL,
+                    chainId: process.env.NEXT_PUBLIC_CHAIN_ID,
+                },
+            });
 
-          setMagic(magic);
+            setMagic(magic);
         }
-      }, []);
+    }, []);
 
     return (
         <>
             <Head>
                 <title>P.A.G.A.</title>
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
-
             </Head>
             <MagicContext.Provider value={value}>
                 <Component {...pageProps} />

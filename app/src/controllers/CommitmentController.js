@@ -34,6 +34,7 @@ export default class CommitmentController {
 
     async applyCommitmentVote(userID, commitmentID, vote) {
         await this.init();
+        console.log("applyCommitmentVote", userID, commitmentID, vote);
         return await this.contract.methods.voteOnCommitment(commitmentID, vote).send({ from: userID });
     }
 }
