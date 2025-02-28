@@ -22,10 +22,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.CommitmentContract__factory>;
     getContractFactory(
-      name: "Lock",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.Lock__factory>;
-    getContractFactory(
       name: "PAGAContract",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.PAGAContract__factory>;
@@ -33,10 +29,6 @@ declare module "hardhat/types/runtime" {
       name: "Politician",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Politician__factory>;
-    getContractFactory(
-      name: "User",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.User__factory>;
     getContractFactory(
       name: "VoterContract",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -53,11 +45,6 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.CommitmentContract>;
     getContractAt(
-      name: "Lock",
-      address: string | ethers.Addressable,
-      signer?: ethers.Signer
-    ): Promise<Contracts.Lock>;
-    getContractAt(
       name: "PAGAContract",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
@@ -67,11 +54,6 @@ declare module "hardhat/types/runtime" {
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.Politician>;
-    getContractAt(
-      name: "User",
-      address: string | ethers.Addressable,
-      signer?: ethers.Signer
-    ): Promise<Contracts.User>;
     getContractAt(
       name: "VoterContract",
       address: string | ethers.Addressable,
@@ -87,10 +69,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.CommitmentContract>;
     deployContract(
-      name: "Lock",
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.Lock>;
-    deployContract(
       name: "PAGAContract",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.PAGAContract>;
@@ -98,10 +76,6 @@ declare module "hardhat/types/runtime" {
       name: "Politician",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.Politician>;
-    deployContract(
-      name: "User",
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.User>;
     deployContract(
       name: "VoterContract",
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -118,11 +92,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.CommitmentContract>;
     deployContract(
-      name: "Lock",
-      args: any[],
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.Lock>;
-    deployContract(
       name: "PAGAContract",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -132,11 +101,6 @@ declare module "hardhat/types/runtime" {
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.Politician>;
-    deployContract(
-      name: "User",
-      args: any[],
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.User>;
     deployContract(
       name: "VoterContract",
       args: any[],

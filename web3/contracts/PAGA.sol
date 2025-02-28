@@ -98,4 +98,11 @@ contract PAGAContract {
         claimContract.createClaim(msg.sender, toPolitician, _title, _description, _coverPictureURI, _investment);
     }
 
+    function claimInvestment(uint _claimId, uint amount) public {
+       uint256 userBalancer = voterContract.getBalance(msg.sender);
+       require(userBalancer >= amount, "Saldo insuficiente");
+       claimContract.investClaim(_claimId, amount);
+       voterContract.decreaseBalance(msg.sender, amount);
+    }
+
 }
