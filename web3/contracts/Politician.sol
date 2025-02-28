@@ -41,7 +41,7 @@ contract Politician {
         _owner = msg.sender;
     }
 
-    function setPagaContract(address _PAGAContractAddress) public onlyOwner {
+    function setPagaContract(address _PAGAContractAddress) external {
         require(_PAGAContract == address(0), "PAGA contract already set");
         _PAGAContract = _PAGAContractAddress;
     }

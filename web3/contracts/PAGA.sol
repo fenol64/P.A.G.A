@@ -20,6 +20,10 @@ contract PAGAContract {
         commitmentContract = CommitmentContract(_commitmentContract);
         politicianContract = Politician(_politicianContract);
         claimContract = ClaimContract(_claimContract);
+        voterContract.setPagaContract(address(this));
+        commitmentContract.setPagaContract(address(this));
+        politicianContract.setPagaContract(address(this));
+        claimContract.setPagaContract(address(this));
     }
 
     modifier onlyOwner() {

@@ -44,7 +44,7 @@ contract ClaimContract{
         
     }
 
-    function setPagaContract(address _PAGAContractAddress) external onlyOwner {
+    function setPagaContract(address _PAGAContractAddress) external {
         require(_PAGAContract == address(0), "PAGA contract already set");
         _PAGAContract = _PAGAContractAddress;
     }
