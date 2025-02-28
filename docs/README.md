@@ -2,7 +2,7 @@
 
 ## Introdução
 
-O **P.A.G.A.** (Programa de Participação e Ação Governamental Ativa) é uma plataforma inovadora que visa fortalecer a democracia, estimular a participação cidadã e promover maior transparência na gestão pública. O projeto incentiva os eleitores a monitorarem o cumprimento das promessas de campanha dos políticos e, como incentivo, recompensa essa fiscalização com tokens baseados em **tecnologia Web3**.
+O **P.A.G.A.** (Promessa Assinada Gera Atitude) é uma plataforma inovadora que visa fortalecer a democracia, estimular a participação cidadã e promover maior transparência na gestão pública. O projeto incentiva os eleitores a monitorarem o cumprimento das promessas de campanha dos políticos e, como incentivo, recompensa essa fiscalização com tokens baseados em **tecnologia Web3**.
 
 ## Objetivos
 
