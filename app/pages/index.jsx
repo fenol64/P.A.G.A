@@ -8,6 +8,44 @@ import { useMagic } from "./_app";
 import localforage from "localforage";
 import CommitmentController from "root/src/controllers/CommitmentController";
 
+export function ToastMessage({ message, type, iconName }) {
+    try {
+        const bodyElement = document.querySelector("body");
+
+        const toastElementContainer = document.createElement("div");
+        toastElementContainer.className = "toast-container position-fixed bottom-0 end-0 p-3";
+        bodyElement.appendChild(toastElementContainer);
+
+        const toastElement = document.createElement("div");
+        toastElement.className = `toast bg-${type} text-white rounded-5`;
+        toastElement.onclick = () => toastElement.remove();
+        toastElementContainer.appendChild(toastElement);
+
+        toastElement.innerHTML = `
+            <div class="toast-header">
+                <i class="${iconName} me-2"></i>
+                <strong class="me-auto">${message}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        `;
+        const toast = new bootstrap.Toast(toastElement);
+        toast.show();
+
+        toastElement.addEventListener("shown.bs.toast", () => {
+            setTimeout(() => toast.hide(), 5000);
+        });
+        toastElement.addEventListener("hidden.bs.toast", () => {
+            toastElement.remove();
+            toastElementContainer.remove();
+        });
+
+        return toastElement;
+
+    } catch (error) {
+        console.error("Erro ao criar toast:", error);
+    }
+}
+
 export default function HomePage({ ...props }) {
     const [user, setUser] = useState(null);
     const [balance, setBalance] = useState(0);
@@ -77,6 +115,13 @@ export default function HomePage({ ...props }) {
         if (userHash) {
             const res = await new CommitmentController().applyVote(userHash, commitmentId, vote);
             console.log(res);
+
+            if (res?.error) {
+                alert("Erro ao votar na promessa.");
+                return;
+            }
+
+
         } else {
             alert("Você precisa estar autenticado para votar.");
             openOrCloseModal("modalAuth").open();
@@ -104,6 +149,7 @@ export default function HomePage({ ...props }) {
                     <h1 className="navbar-brand m-0 fw-bold">PAGA</h1>
                 </Container>
             </header>
+
             <Container>
                 <hgroup className="text-center text-md-start mt-3">
                     <h2 className="h3 text-white">Participação e Ação Governamental Ativa</h2>
@@ -113,13 +159,15 @@ export default function HomePage({ ...props }) {
                     </div>
                 </hgroup>
 
+                <Button color="primary" onClick={() => ToastMessage({ message: "Teste", type: "success", iconName: "fal fa-check" })} label="Testar Toast" />
+
                 <div className="d-flex flex-column gap-0 align-items-center">
                     <span className="d-block text-center text-dark rounded-top-pill bg-light pt-3 px-4">
                         <i className="fal fa-lock fa-3x"></i>
                     </span>
                     <div className="bg-light text-dark rounded-5 p-4">
                         <p>Utilizamos a <b>tecnologia blockchain</b> para garantir a <b>transparência e segurança</b> dos dados. Desta forma, cada voto e promessa é único e imutável.</p>
-                        <p>Para votar e comentar é necessário autenticar-se.</p>
+                        <p>E para votar e comentar é necessário autenticar-se.</p>
                     </div>
                 </div>
 
