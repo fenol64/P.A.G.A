@@ -5,7 +5,7 @@ services:
       dockerfile: ./infra/app/Dockerfile
     container_name: paga_app
     ports:
-      - "3000:3000"
+      - "3554:3554"
   hardhat:
     build:
       context: ..

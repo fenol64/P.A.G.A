@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "next dev -p 3555",
-    "build": "next build",
+    "build": "next build -p 3554",
     "start": "next start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
