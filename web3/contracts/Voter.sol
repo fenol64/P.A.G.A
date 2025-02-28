@@ -23,11 +23,6 @@ contract VoterContract {
     event IssueReported(address indexed voter, string description, uint256 priority);
     event AllPoliticiansReset();
 
-    modifier onlyRegisteredVoter() {
-        require(voters[msg.sender].voterAddress != address(0), "Voter not registered");
-        _;
-    }
-
     modifier onlyOwner() {
         require(msg.sender == _owner, "Caller is not the owner");
         _;
@@ -42,6 +37,12 @@ contract VoterContract {
         _owner = msg.sender;
     }
 
+    function setPagaContract(address _PAGAContractAddress) external {
+        require(_PAGAContract == address(0), "PAGA contract already set");
+        _PAGAContract = _PAGAContractAddress;
+    }
+
+
     function createVoter(address _address) public {
         require(voters[_address].voterAddress == address(0), "Voter already exists");
 
@@ -55,10 +56,6 @@ contract VoterContract {
     }
 
 
-    function setPagaContract(address _PAGAContractAddress) public onlyOwner {
-        require(_PAGAContract == address(0), "PAGA contract already set");
-        _PAGAContract = _PAGAContractAddress;
-    }
 
     function registerVoter(address user, address _politician) external onlyPAGAContract {
         require(voters[user].voterAddress == address(0), "Voter already registered");
@@ -81,6 +78,10 @@ contract VoterContract {
             voters[_voters[i]].balance += _amount;
         }
         emit TokensAwarded(_voters[0], _amount);
+    }
+
+    function decreaseBalance(address _voter, uint256 _amount) external onlyPAGAContract {
+        voters[_voter].balance -= _amount;
     }
 
     function resetAllChosenPoliticians() external onlyOwner {

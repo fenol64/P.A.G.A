@@ -14,44 +14,134 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
+      name: "ClaimContract",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ClaimContract__factory>;
+    getContractFactory(
+      name: "CommitmentContract",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.CommitmentContract__factory>;
+    getContractFactory(
       name: "Lock",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Lock__factory>;
     getContractFactory(
+      name: "PAGAContract",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.PAGAContract__factory>;
+    getContractFactory(
+      name: "Politician",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Politician__factory>;
+    getContractFactory(
       name: "User",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.User__factory>;
+    getContractFactory(
+      name: "VoterContract",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.VoterContract__factory>;
 
+    getContractAt(
+      name: "ClaimContract",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ClaimContract>;
+    getContractAt(
+      name: "CommitmentContract",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.CommitmentContract>;
     getContractAt(
       name: "Lock",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.Lock>;
     getContractAt(
+      name: "PAGAContract",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.PAGAContract>;
+    getContractAt(
+      name: "Politician",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Politician>;
+    getContractAt(
       name: "User",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.User>;
+    getContractAt(
+      name: "VoterContract",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.VoterContract>;
 
+    deployContract(
+      name: "ClaimContract",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ClaimContract>;
+    deployContract(
+      name: "CommitmentContract",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.CommitmentContract>;
     deployContract(
       name: "Lock",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.Lock>;
     deployContract(
+      name: "PAGAContract",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.PAGAContract>;
+    deployContract(
+      name: "Politician",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.Politician>;
+    deployContract(
       name: "User",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.User>;
+    deployContract(
+      name: "VoterContract",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.VoterContract>;
 
+    deployContract(
+      name: "ClaimContract",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ClaimContract>;
+    deployContract(
+      name: "CommitmentContract",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.CommitmentContract>;
     deployContract(
       name: "Lock",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.Lock>;
     deployContract(
+      name: "PAGAContract",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.PAGAContract>;
+    deployContract(
+      name: "Politician",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.Politician>;
+    deployContract(
       name: "User",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.User>;
+    deployContract(
+      name: "VoterContract",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.VoterContract>;
 
     // default types
     getContractFactory(
