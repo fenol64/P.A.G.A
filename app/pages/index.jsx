@@ -3,64 +3,96 @@ import { AlertMessage, Button, CardCommitment, Container, ModalCloseButton, Navb
 
 import mock from "root/data/db.json";
 import UserController from "root/src/controllers/UserController";
-import { getWeb3Provider, humanDate, humanDatePast } from "root/src/utils";
+import { humanDate, humanDatePast } from "root/src/utils";
 import { useMagic } from "./_app";
 import localforage from "localforage";
 import CommitmentController from "root/src/controllers/CommitmentController";
 
 export default function HomePage({ ...props }) {
     const [user, setUser] = useState(null);
+    const [balance, setBalance] = useState(0);
     const [userHash, setUserHash] = useState(null);
     const [users, setUsers] = useState(props?.users ?? {});
     const { magic } = useMagic();
 
+    const [auth_callback, setAuthCallback] = useState(null);
+    const [back_modal, setBackModal] = useState(null);
 
     const [politician, setPolitician] = useState(null);
 
-    const [commitments, setCommitments] = useState(props.commitments ?? []);
     const [commitment, setCommitment] = useState(null);
+    const [commitments, setCommitments] = useState(props.commitments ?? []);
+    const [commitmentsFiltred, setCommitmentsFiltred] = useState(props.commitments ?? []);
+
 
     const commitmentsOfPolitician = (politicianId) => {
         const commitmentsFiltred = commitments?.filter(c => c.authorId === politicianId);
         return commitmentsFiltred;
-        return [];
     }
 
     const metaMaskAuth = async () => {
-        if (typeof window.ethereum !== 'undefined') {
+        if (typeof window.ethereum !== "undefined") {
             const user_addr = await new UserController().connectMetamask();
-            await localforage.setItem('userHash', user_addr.account);
-            await localforage.setItem('type', 'metamask');
+            await localforage.setItem("userHash", user_addr.account);
+
             setUser(user_addr);
+            await authenticatedFeedback();
         }
     }
 
     const magicLinkAuth = async () => {
         const magic_data = await magic.wallet.connectWithUI();
-        await localforage.setItem('userHash', magic_data);
-        await localforage.setItem('type', 'magic');
+        localforage.setItem("userHash", magic_data);
+
+        setUser(magic_data);
+        await authenticatedFeedback();
     }
 
-    const checkAuth = async () => {
-        const lf_userHash = await localforage.getItem('userHash');
-        if (lf_userHash) {
-            setUserHash(lf_userHash);
-            return lf_userHash;
-        } else {
-            const modal = new bootstrap.Modal(document.getElementById('modalAuth'));
-            modal.show();
-        }
+    const authenticatedFeedback = async () => {
+        const userHash = await localforage.getItem("userHash");
+        if (userHash) {
+            setUserHash(userHash);
+            console.log("User hash", userHash);
 
-        return null;
+            alert("Autenticado com sucesso!");
+
+            if (commitment) openOrCloseModal("modalCommitment").open();
+            if (politician) openOrCloseModal("modalPolitician").open();
+
+            openOrCloseModal("modalAuth").close();
+        }
+    }
+
+    const openOrCloseModal = (modalId) => {
+        const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById(modalId));
+        return {
+            open: () => modal.show(),
+            close: () => modal.hide()
+        }
     }
 
     const applyVote = async (commitmentId, vote) => {
-        const lf_userHash = await checkAuth();
-        if (user) {
+        console.log("Applying vote to commitment", commitmentId, vote);
+        const userHash = await localforage.getItem("userHash");
+        if (userHash) {
             const res = await new CommitmentController().applyVote(userHash, commitmentId, vote);
-            return res;
+            console.log(res);
+        } else {
+            alert("Você precisa estar autenticado para votar.");
+            openOrCloseModal("modalAuth").open();
+            return;
         }
     }
+
+    useEffect(() => {
+        (async () => {
+            const userHash = await localforage.getItem("userHash");
+            if (userHash) {
+                setUserHash(userHash);
+                console.log("User hash", userHash);
+            }
+        })();
+    }, []);
 
     return <main className="">
         {/* <Navbar pageTitle="P.A.G.A." /> */}
@@ -90,22 +122,43 @@ export default function HomePage({ ...props }) {
                         <p>Para votar e comentar é necessário autenticar-se.</p>
                     </div>
                 </div>
+
+                {userHash
+                    ? <div className="d-flex flex-column gap-3 align-items-center">
+                        <h3 className="text-center">Você está autenticado em crypto!</h3>
+                        <p>Seu saldo: <span className="badge bg-green fs-6"><i className="fal fa-coins me-1" /> {balance ?? 0} PC</span></p>
+                        <Button color="danger" label="Desconectar" iconName="fal fa-sign-out" className="btn-block w-100" size="lg" rounded="pill p-3" onClick={async () => {
+                            await localforage.removeItem("userHash");
+                            setUserHash(null);
+                        }} />
+                    </div>
+                    : <Button color="light" label="Entrar para votar" iconName="fal fa-fingerprint" className="btn-block w-100" size="lg" rounded="pill p-3" modal="#modalAuth" />
+                }
             </Container>
         </section>
 
-
         <section id="pageContent" className="d-flex flex-column gap-3 py-3">
             <Container title="Promessas Recentes" iconName="fal fa-bullhorn" className={"gap-4"}>
-                <form onSubmit={(e) => e.preventDefault()} className="">
+                <form onSubmit={(e) => {
+                    e.preventDefault();
+
+                    const formData = new FormData(e.target);
+                    const search = formData.get("search");
+                    console.log("Searching for", search);
+
+                    const commitmentsFiltred = commitments?.filter(c => c.title.includes(search) || c.description.includes(search) || c.author.name.includes(search));
+                    setCommitmentsFiltred(commitmentsFiltred);
+
+                }} className="">
                     <fieldset className="row g-3">
                         <div className="col-12 col-md-5">
-                            <input type="text" className="form-control rounded-pill form-control-lg" placeholder="Buscar promessas..." />
+                            <input type="text" name="search" className="form-control rounded-pill form-control-lg" placeholder="Buscar promessas..." />
                         </div>
                         <div className="col-12 col-md-5">
-                            <select className="form-select rounded-pill form-select-lg">
+                            <select name="commitment_status" className="form-select rounded-pill form-select-lg">
                                 <option value="">Todas as promessas</option>
-                                <option value="">Promessas cumpridas</option>
-                                <option value="">Promessas não cumpridas</option>
+                                <option value="finished">Promessas cumpridas</option>
+                                <option value="expired">Promessas não cumpridas</option>
                             </select>
                         </div>
                         <div className="col-12 col-md">
@@ -113,10 +166,11 @@ export default function HomePage({ ...props }) {
                         </div>
                     </fieldset>
                 </form>
+
                 <div className="d-flex flex-column gap-4">
-                    {commitments?.length === 0
+                    {commitmentsFiltred?.length === 0
                         ? <AlertMessage type="info" message="Nenhuma promessa encontrada." iconName="fal fa-info-circle" />
-                        : commitments?.map((commitment, index) => {
+                        : commitmentsFiltred?.map((commitment, index) => {
                             const classVar = [];
                             classVar.push("card", "border-0", "rounded-5", "commitment-card");
 
@@ -161,8 +215,7 @@ export default function HomePage({ ...props }) {
                                     ? <ModalCloseButton color="outline-light" rounded="pill" target="#modalPolitician" onClick={() => setCommitment(null)} />
                                     : <ModalCloseButton color="outline-light" rounded="pill" dismiss onClick={() => setCommitment(null)} />
                                 }
-
-                                <h2 className="navbar-brand text-uppercase text-center w-100 m-2">Promessa</h2>
+                                <h2 className="navbar-brand text-uppercase text-center w-100 m-2">Detalhes da Promessa</h2>
                             </header>
                             <div className="modal-body p-3">
                                 <div className="d-flex flex-column gap-3">
@@ -194,14 +247,19 @@ export default function HomePage({ ...props }) {
                                     </div>
                                 </div>
                             </div>
-                            <footer className="modal-footer border-0 text-center">
 
-                                <h3 className="w-100 text-center">A promessa foi cumprida?</h3>
-                                <div className="d-flex flex-row gap-3 w-100 align-items-center justify-content-center p-3">
-                                    <Button color="danger" iconName="fal fa-thumbs-down fa-2x" size="lg" rounded="pill p-4" onClick={() => applyVote(commitment.id, false)} />
-                                    <Button color="success" iconName="fal fa-thumbs-up fa-2x" size="lg" rounded="pill p-4" onClick={() => applyVote(commitment.id, true)} />
-                                </div>
-                            </footer>
+                            {userHash
+                                ? <footer className="modal-footer border-0 text-center">
+                                    <h3 className="w-100 text-center">A promessa foi cumprida?</h3>
+                                    <div className="d-flex flex-row gap-3 w-100 align-items-center justify-content-center p-3">
+                                        <Button color="danger" iconName="fal fa-thumbs-down fa-2x" size="lg" rounded="pill p-4" onClick={() => applyVote(commitment.id, false)} />
+                                        <Button color="success" iconName="fal fa-thumbs-up fa-2x" size="lg" rounded="pill p-4" onClick={() => applyVote(commitment.id, true)} />
+                                    </div>
+                                </footer>
+                                : <footer className="modal-footer border-0 text-center">
+                                    <Button color="light" label="Entrar para votar" iconName="fal fa-fingerprint" className="btn-block w-100" border="2" size="lg" rounded="pill p-3" modal="#modalAuth" />
+                                </footer>
+                            }
                         </>}
                     </div>
                 </div>
