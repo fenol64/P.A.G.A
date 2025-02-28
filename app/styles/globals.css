@@ -4,15 +4,16 @@
     --yellow: #fedd00;
 }
 
+*:last-child {
+    margin-bottom: 0;
+}
+
 html, body {
     margin: 0;
     padding: 0;
-    height: 100%;
 }
 
-#__next, main {
-    height: 100%;
-}
+#__next, main {}
 
 .text-muted {
     color: inherit !important;
@@ -42,6 +43,10 @@ html, body {
     display: inline-block;
 }
 
+.bg-opacity-light {
+    background-color: rgba(255, 255, 255, 0.35);
+}
+
 .btn-opacity-light {
     background-color: rgba(255, 255, 255, 0.35);
     color: var(--bs-light);
@@ -62,4 +67,11 @@ html, body {
 
 .bg-yellow {
     background-color: var(--yellow);
+}
+
+@media screen and (min-width: 768px) {
+    .rounded-bottom-md-0 {
+        border-bottom-right-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+    }
 }

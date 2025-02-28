@@ -59,17 +59,19 @@ export function Navbar({ pageTitle, currentPage, backLink }) {
     </>
 }
 
-export function Container({ title, icon, description, sizeLimit, children }) {
+export function Container({ title, iconName, description, sizeLimit, className, children }) {
     var style = {};
     // if (sizeLimit) style.maxWidth = sizeLimit;
-    style.maxWidth = "40rem";
-    return <div className="container-fluid container-lg d-flex flex-column gap-3 p-3" style={style}>
-        {(title || description || icon) && <header>
+    style.maxWidth = "45rem";
+    return <div className={`container-fluid container-lg d-flex flex-column gap-3 p-3 ${className ?? ""}`} style={style}>
+        {(title || description || iconName) && <header>
             <hgroup className="d-flex flex-row gap-3">
-                {icon && <i className={`${icon} fa-2x`}></i>}
-                {title && <h2>{title}</h2>}
+                {iconName && <i className={`${iconName} fa-2x mt-1`}></i>}
+                <div>
+                    {title && <h2>{title}</h2>}
+                    {description && <p>{description}</p>}
+                </div>
             </hgroup>
-            {description && <p>{description}</p>}
         </header>}
         {children}
     </div>
@@ -94,7 +96,7 @@ export const UserProfilePicture = ({ user, size, ...props }) => {
     if (size) styles = { ...styles, width: sizes[size], height: sizes[size] };
 
     var classVar = [];
-    classVar.push("rounded-circle", "border", "border-1");
+    classVar.push("rounded-circle", "border", "border-1", "bg-light");
 
     return <img src={user.profilePictureURI} alt={user.name} className={`${classVar.join(" ")}`} style={styles} />
 }
