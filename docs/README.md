@@ -101,7 +101,7 @@ O P.A.G.A. é baseado em tecnologia blockchain para garantir transparência e im
 
 ![Roadmap](./mnt/data/diagrama_c4_03.png)
 
-contatos:
+Contatos:
 
 **GitHub**:
 
