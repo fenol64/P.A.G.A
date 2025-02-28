@@ -3,7 +3,7 @@ COMMAND = docker compose -f ./infra/docker-compose.yml
 all: dup
 
 dup:
-	$(COMMAND) up --build
+	$(COMMAND) up -d --build
 
 down:
 	$(COMMAND) down
