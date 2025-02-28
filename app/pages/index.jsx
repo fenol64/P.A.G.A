@@ -6,9 +6,11 @@ import UserController from "root/src/controllers/UserController";
 import { humanDate, humanDatePast } from "root/src/utils";
 import { useMagic } from "./_app";
 import localforage from "localforage";
+import CommitmentController from "root/src/controllers/CommitmentController";
 
 export default function HomePage({ ...props }) {
     const [user, setUser] = useState(null);
+    const [userHash, setUserHash] = useState(null);
     const [users, setUsers] = useState(props?.users ?? {});
     const { magic } = useMagic();
 
@@ -27,29 +29,50 @@ export default function HomePage({ ...props }) {
     const metaMaskAuth = async () => {
         if (typeof window.ethereum !== 'undefined') {
             const user_addr = await new UserController().connectMetamask();
-            localforage.setItem('token', user_addr.account);
+            await localforage.setItem('userHash', user_addr.account);
+
+            setUser(user_addr);
         }
     }
 
     const magicLinkAuth = async () => {
         const magic_data = await magic.wallet.connectWithUI();
-        localforage.setItem('token', magic_data);
+        localforage.setItem('userHash', magic_data);
     }
 
-    useEffect(() => {
-    }, [commitment]);
+    const checkAuth = async () => {
+        const lf_userHash = await localforage.getItem('userHash');
+        if (lf_userHash) {
+            setUserHash(lf_userHash);
+            return lf_userHash;
+        } else {
+            const modal = new bootstrap.Modal(document.getElementById('modalAuth'));
+            modal.show();
+        }
+
+        return null;
+    }
+
+    const applyVote = async (commitmentId, vote) => {
+        const lf_userHash = await checkAuth();
+        if (user) {
+            const res = await new CommitmentController().applyVote(userHash, commitmentId, vote);
+            return res;
+        }
+    }
 
     return <main className="">
         {/* <Navbar pageTitle="P.A.G.A." /> */}
 
-        <header id="pageHeader" className="navbar navbar-dark bg-blue p-0 fixed-top rounded-bottom-5">
-            <Container className="">
-                <h1 className="navbar-brand m-0 fw-bold">PAGA</h1>
-            </Container>
-        </header>
-        <section id="pageHeader" className="d-flex flex-column gap-3 bg-blue text-white p-3 rounded-bottom-5 mt-5">
+
+        <section id="pageHeaderContainer" className="d-flex flex-column gap-3 bg-blue text-white p-3 rounded-bottom-5 pt-5">
+            <header id="pageHeader" className="navbar navbar-dark bg-blue p-0 fixed-top rounded-bottom-5">
+                <Container className="">
+                    <h1 className="navbar-brand m-0 fw-bold">PAGA</h1>
+                </Container>
+            </header>
             <Container>
-                <hgroup className="text-center text-md-start">
+                <hgroup className="text-center text-md-start mt-3">
                     <h2 className="h3 text-white">Participação e Ação Governamental Ativa</h2>
                     <div className="lead text-light">
                         <p>Aqui você pode acompanhar as promessas feitas por políticos, informar se foram cumpridas.</p>
@@ -69,23 +92,6 @@ export default function HomePage({ ...props }) {
             </Container>
         </section>
 
-        <section id="modalAuth" className="modal fade">
-            <div className="modal-dialog modal-dialog-centered">
-                <div className="modal-content">
-                    <header className="modal-header bg-transparent border-0 p-2">
-                        <ModalCloseButton dismiss />
-                    </header>
-                    <div className="modal-body p-3">
-                        <h3 className="modal-title">Autenticação</h3>
-                        <p className="lead">Para votar e comentar é necessário autenticar-se.</p>
-                        <Button color="light" border="2 border-dark" label="Autenticar Metamask" className="btn-block w-100" size="lg" rounded="pill p-3" iconName="fab fa-google" onClick={metaMaskAuth}/>
-                        <Button color="light" border="2 border-dark" label="Autenticar com Google" className="btn-block w-100" size="lg" rounded="pill p-3" iconName="fab fa-google" onClick={magicLinkAuth}/>
-                    </div>
-                    <footer className="modal-footer border-0">
-                    </footer>
-                </div>
-            </div>
-        </section>
 
         <section id="pageContent" className="d-flex flex-column gap-3 py-3">
             <Container title="Promessas Recentes" iconName="fal fa-bullhorn" className={"gap-4"}>
@@ -156,16 +162,6 @@ export default function HomePage({ ...props }) {
                                 }
 
                                 <h2 className="navbar-brand text-uppercase text-center w-100 m-2">Promessa</h2>
-
-                                {/* <div className="d-flex flex-column gap-2">
-                                    <div className="d-flex flex-row gap-3 align-items-center p-2" data-bs-toggle="modal" data-bs-target="#modalPolitician" onClick={() => setPolitician(commitment.author)}>
-                                        <UserProfilePicture user={commitment.author} size="md" />
-                                        <div className="d-flex flex-column gap-0 pe-5">
-                                            <p className="m-0 fw-bold">{commitment.author.name}</p>
-                                            <p className="m-0">{commitment.author.politicianRole}</p>
-                                        </div>
-                                    </div>
-                                </div> */}
                             </header>
                             <div className="modal-body p-3">
                                 <div className="d-flex flex-column gap-3">
@@ -201,8 +197,8 @@ export default function HomePage({ ...props }) {
 
                                 <h3 className="w-100 text-center">A promessa foi cumprida?</h3>
                                 <div className="d-flex flex-row gap-3 w-100 align-items-center justify-content-center p-3">
-                                    <Button color="danger" iconName="fal fa-thumbs-down fa-2x" size="lg" rounded="pill p-4" />
-                                    <Button color="success" iconName="fal fa-thumbs-up fa-2x" size="lg" rounded="pill p-4" />
+                                    <Button color="danger" iconName="fal fa-thumbs-down fa-2x" size="lg" rounded="pill p-4" onClick={() => applyVote(commitment.id, false)} />
+                                    <Button color="success" iconName="fal fa-thumbs-up fa-2x" size="lg" rounded="pill p-4" onClick={() => applyVote(commitment.id, true)} />
                                 </div>
                             </footer>
                         </>}
@@ -258,6 +254,27 @@ export default function HomePage({ ...props }) {
                     </div>
                 </div>
             </section>
+        </section>
+
+        <section id="modalAuth" className="modal fade">
+            <div className="modal-dialog modal-dialog-centered">
+                <div className="modal-content">
+                    <header className="modal-header bg-transparent border-0 p-2">
+                        <ModalCloseButton dismiss />
+                    </header>
+                    <div className="modal-body p-3">
+                        <div className="d-flex flex-column gap-3 align-items-center">
+
+                            <h3 className="modal-title">Autenticação</h3>
+                            <p className="lead">Para votar e comentar é necessário autenticar-se. Escolha um dos serviços abaixo para:</p>
+                            <Button color="light" border="2 border-dark" label="Metamask" className="btn-block w-100" size="lg" rounded="pill p-3" iconName="fal fa-dog" onClick={metaMaskAuth} />
+                            <Button color="light" border="2 border-dark" label="Conta Google" className="btn-block w-100" size="lg" rounded="pill p-3" iconName="fab fa-google" onClick={magicLinkAuth} />
+                        </div>
+                    </div>
+                    <footer className="modal-footer border-0">
+                    </footer>
+                </div>
+            </div>
         </section>
     </main>
 }
