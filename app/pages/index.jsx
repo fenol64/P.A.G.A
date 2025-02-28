@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { AlertMessage, Button, CardCommitment, Container, ModalCloseButton, Navbar, UserProfilePicture } from "root/components/LayoutComponents";
 
 import mock from "root/data/db.json";
-import UserController from "root/src/controllers/UserController";
+import UserController from "root/src/controllers/mainController";
 import { getWeb3Provider, humanDate, humanDatePast } from "root/src/utils";
 import { useMagic } from "./_app";
 import localforage from "localforage";
 import CommitmentController from "root/src/controllers/CommitmentController";
+import mainController from "root/src/controllers/mainController";
 
 export default function HomePage({ ...props }) {
     const [user, setUser] = useState(null);
@@ -28,10 +29,16 @@ export default function HomePage({ ...props }) {
 
     const metaMaskAuth = async () => {
         if (typeof window.ethereum !== 'undefined') {
-            const user_addr = await new UserController().connectMetamask();
+            const maincontroller = await new mainController();
+            maincontroller.init();
+            const user_addr = await maincontroller.connectMetamask();
             await localforage.setItem('userHash', user_addr.account);
             await localforage.setItem('type', 'metamask');
             setUser(user_addr);
+
+            const commitments = (await new CommitmentController().init()).getCommitment();
+
+            console.log({commitments});
         }
     }
 
