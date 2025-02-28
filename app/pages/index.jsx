@@ -25,16 +25,41 @@ export default function HomePage({ ...props }) {
 
     return <main className="">
         {/* <Navbar pageTitle="P.A.G.A." /> */}
-        <section id="pageHeader" className="d-flex flex-column gap-3 bg-blue text-light p-3">
-            <Container>
-                <h1 className="m-0 fw-bold">PAGA</h1>
-                <h2 className="h5 m-0">Participação e Ação Governamental Ativa</h2>
+
+        <header id="pageHeader" className="navbar navbar-dark bg-blue p-0 sticky-top">
+            <Container className="">
+                <h1 className="navbar-brand m-0 fw-bold">PAGA</h1>
             </Container>
+        </header>
+        <section id="pageHeader" className="d-flex flex-column gap-3 bg-blue text-light p-3 rounded-bottom-5">
+            <Container>
+                <h2 className="h3 m-0">Participação e Ação Governamental Ativa</h2>
+                <p className="lead">Aqui você pode acompanhar as promessas feitas por políticos, informar se foram cumpridas e cobrar ações.</p>
+
+                <Button modal="#modalAuth" color="light" border="2 border-dark" label="Autenticar para Votar" className="btn-block w-100" size="lg" rounded="pill p-3" iconName="fal fa-lock" />
+            </Container>
+        </section>
+
+        <section id="modalAuth" className="modal fade">
+            <div className="modal-dialog modal-dialog-centered">
+                <div className="modal-content">
+                    <header className="modal-header bg-transparent border-0 p-2">
+                        <ModalCloseButton dismiss />
+                    </header>
+                    <div className="modal-body p-3">
+                        <h3 className="modal-title">Autenticação</h3>
+                        <p className="lead">Para votar e comentar é necessário autenticar-se.</p>
+                        <Button color="light" border="2 border-dark" label="Autenticar Metamask" className="btn-block w-100" size="lg" rounded="pill p-3" iconName="fab fa-google" />
+                        <Button color="light" border="2 border-dark" label="Autenticar com Google" className="btn-block w-100" size="lg" rounded="pill p-3" iconName="fab fa-google" />
+                    </div>
+                    <footer className="modal-footer border-0">
+                    </footer>
+                </div>
+            </div>
         </section>
 
         <section id="pageContent" className="d-flex flex-column gap-3 flex-fill overflow-auto">
             <Container>
-                <Button color="light" border="2 border-dark" label="Autenticar para Votar" className="btn-block w-100" size="lg" rounded="pill p-3" iconName="fal fa-fingerprint" />
 
                 <div className="d-flex flex-column gap-4">
                     {commitments?.length === 0

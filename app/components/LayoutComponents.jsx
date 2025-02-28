@@ -41,7 +41,9 @@ export function ModalCloseButton({ target, dismiss, ...props }) {
         props["data-bs-dismiss"] = "modal";
     }
 
-    return <Button color="transparent" iconName="fal fa-times" className={"position-absolute end-0 top-0 m-2"} {...props} />
+    props.style = { position: "absolute", top: "0", right: "0", margin: "1rem", zIndex: 1000 };
+
+    return <Button color="transparent" iconName="fal fa-times" className={""} {...props} />
 }
 
 export function Navbar({ pageTitle, currentPage, backLink }) {
