@@ -60,12 +60,29 @@ contract PAGAContract {
 
     function executeDaily() public onlyOwner {
         uint256[] memory commitments = commitmentContract.executeDailyJob();
-        politicianContract.increaseBalances(commitmentContract.getSuccessfulCommitmentAuthors(commitments), 1);
+        
+        // Verificar se há commitments retornados
+        require(commitments.length > 0, "Nenhuma promessa foi processada");
+
+        address[] memory successfulAuthors = commitmentContract.getSuccessfulCommitmentAuthors(commitments);
+        
+        // Verificar se há políticos para premiar
+        require(successfulAuthors.length > 0, "Nenhum politico para premiar");
+
+        politicianContract.increaseBalances(successfulAuthors, 1);
+
         for (uint i = 0; i < commitments.length; i++) {
-            voterContract.increaseBalances(commitmentContract.getVotersByVote(commitments[i], 
-                commitmentContract.getCommitmentStatusBool(commitments[i])), 1);
+            address[] memory correctVoters = commitmentContract.getVotersByVote(
+                commitments[i], commitmentContract.getCommitmentStatusBool(commitments[i])
+            );
+
+            // Verificar se há eleitores para premiar
+            require(correctVoters.length > 0, "Nenhum eleitor votou corretamente");
+
+            voterContract.increaseBalances(correctVoters, 1);
         }
     }
+
 
     function createClaim(
         address toPolitician,
