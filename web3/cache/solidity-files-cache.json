@@ -1,7 +1,7 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/home/fenol/carnaval/contracts/Lock.sol": {
+    "/home/fenol/P.A.G.A/web3/contracts/Lock.sol": {
       "lastModificationDate": 1740690289414,
       "contentHash": "7eee587c347fe6b1de50c96688cb9477",
       "sourceName": "contracts/Lock.sol",
@@ -37,7 +37,7 @@
         "Lock"
       ]
     },
-    "/home/fenol/carnaval/contracts/User.sol": {
+    "/home/fenol/P.A.G.A/web3/contracts/User.sol": {
       "lastModificationDate": 1740690289414,
       "contentHash": "33dee5557361efb755237690dfd69154",
       "sourceName": "contracts/User.sol",

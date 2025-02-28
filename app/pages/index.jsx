@@ -2,11 +2,16 @@ import { useEffect, useState } from "react";
 import { AlertMessage, Button, CardCommitment, Container, ModalCloseButton, Navbar, UserProfilePicture } from "root/components/LayoutComponents";
 
 import mock from "root/data/db.json";
+import UserController from "root/src/controllers/UserController";
 import { humanDate, humanDatePast } from "root/src/utils";
+import { useMagic } from "./_app";
+import localforage from "localforage";
 
 export default function HomePage({ ...props }) {
     const [user, setUser] = useState(null);
     const [users, setUsers] = useState(props?.users ?? {});
+    const { magic } = useMagic();
+
 
     const [politician, setPolitician] = useState(null);
 
@@ -17,6 +22,18 @@ export default function HomePage({ ...props }) {
         const commitmentsFiltred = commitments?.filter(c => c.authorId === politicianId);
         return commitmentsFiltred;
         return [];
+    }
+
+    const metaMaskAuth = async () => {
+        if (typeof window.ethereum !== 'undefined') {
+            const user_addr = await new UserController().connectMetamask();
+            localforage.setItem('token', user_addr.account);
+        }
+    }
+
+    const magicLinkAuth = async () => {
+        const magic_data = await magic.wallet.connectWithUI();
+        localforage.setItem('token', magic_data);
     }
 
     useEffect(() => {
@@ -49,8 +66,8 @@ export default function HomePage({ ...props }) {
                     <div className="modal-body p-3">
                         <h3 className="modal-title">Autenticação</h3>
                         <p className="lead">Para votar e comentar é necessário autenticar-se.</p>
-                        <Button color="light" border="2 border-dark" label="Autenticar Metamask" className="btn-block w-100" size="lg" rounded="pill p-3" iconName="fab fa-google" />
-                        <Button color="light" border="2 border-dark" label="Autenticar com Google" className="btn-block w-100" size="lg" rounded="pill p-3" iconName="fab fa-google" />
+                        <Button color="light" border="2 border-dark" label="Autenticar Metamask" className="btn-block w-100" size="lg" rounded="pill p-3" iconName="fab fa-google" onClick={metaMaskAuth}/>
+                        <Button color="light" border="2 border-dark" label="Autenticar com Google" className="btn-block w-100" size="lg" rounded="pill p-3" iconName="fab fa-google" onClick={magicLinkAuth}/>
                     </div>
                     <footer className="modal-footer border-0">
                     </footer>
