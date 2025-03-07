@@ -117,7 +117,7 @@ export default function HomePage({ ...props }) {
         if (userHash) {
             setUserHash(userHash);
 
-            ToastMessage({ message: "Autenticado com sucesso!", type: "success", iconName: "fal fa-check" });
+            ToastMessage({ message: "Autenticado com sucesso.", type: "success", iconName: "fal fa-check" });
 
             if (commitment) openOrCloseModal("modalCommitment").open();
             if (politician) openOrCloseModal("modalPolitician").open();
