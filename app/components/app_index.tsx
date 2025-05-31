@@ -13,9 +13,10 @@ export const CHAIN_NAME = "cosmoshub";
 export const CHAIN_NAME_STORAGE_KEY = "selected-chain";
 import { humanDate, humanDatePast } from "@/src/utils";
 import localforage from "localforage";
-import mainController from "@/src/controllers/mainController";
 import Link from "next/link";
 import { useChain } from "@interchain-kit/react";
+import {queryBalance, queryElector} from "@/src/contracts/query";
+import { voteOnPromise } from "@/src/contracts/execute";
 
 export function ToastMessage({ message, type, iconName }) {
   try {
@@ -124,7 +125,6 @@ export default function HomePage({ ...props }) {
 
   const magicLinkAuth = async () => {
     try {
-      const magic_data = await magic.wallet.connectWithUI();
       await localforage.setItem("userHash", magic_data[0]);
 
       setUser(magic_data[0]);
@@ -149,8 +149,9 @@ export default function HomePage({ ...props }) {
 
   const authenticatedFeedback = async () => {
     const userHash = await localforage.getItem("userHash");
+    const elector = queryElector(userHash);
     if (userHash) {
-      setUserHash(userHash);
+      setUserHash(elector);
 
       ToastMessage({
         message: "Successfully authenticated.",
@@ -161,9 +162,9 @@ export default function HomePage({ ...props }) {
       if (commitment) openOrCloseModal("modalCommitment").open();
       if (politician) openOrCloseModal("modalPolitician").open();
 
-      const balance = await localforage.getItem("balance");
+      const balance = await queryBalance(userHash);
       if (balance) setBalance(balance);
-      const votedCommitments = await localforage.getItem("votedCommitments");
+      const votedCommitments = await queryElector(userHash);
       if (votedCommitments) setVotedCommitments(votedCommitments);
 
       openOrCloseModal("modalAuth").close();
@@ -207,9 +208,13 @@ export default function HomePage({ ...props }) {
       );
       setBalance(newBalance);
 
-      const votedCommitments = await localforage.getItem("votedCommitments");
+      const votedCommitments = await queryElector(userHash);
       if (!votedCommitments) {
-        await localforage.setItem("votedCommitments", { [commitmentId]: vote });
+        await voteOnPromise(
+          userHash,
+            commitmentId,
+            vote
+        );
       } else {
         await localforage.setItem("votedCommitments", {
           ...votedCommitments,
