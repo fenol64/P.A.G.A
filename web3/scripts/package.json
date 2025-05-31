@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "@cosmjs/cosmwasm-stargate": "^0.33.1",
+    "@cosmjs/proto-signing": "^0.33.1",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.1"
+  }
+}

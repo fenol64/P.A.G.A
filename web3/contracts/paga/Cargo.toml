@@ -1,0 +1,29 @@
+[package]
+name = "paga"
+description = "Orchestration contract for managing the PAGA system"
+version = "0.1.0"
+edition = "2021"
+
+# Configurações para o crate lib.rs
+[lib]
+path = "src/lib.rs"  # Aponte para 'lib.rs' dentro do diretório 'src'
+crate-type = ["cdylib", "rlib"]  # cdylib para gerar o .wasm (WebAssembly)
+
+# Dependências
+[dependencies]
+cosmwasm-std = "1.5.0"         # Biblioteca principal do CosmWasm
+cosmwasm-schema = "1.5.0"      # Geração de schema (usado para integração com o cosmwasm)
+cw-storage-plus = "1.1.0"      # Biblioteca para facilitar o gerenciamento de estado
+serde = { version = "1.0", features = ["derive"] } # Serialização e desserialização
+schemars = "0.8.12"            # Geração de schema para contratos inteligentes
+thiserror = "1.0"              # Para tratamento de erros
+serde_json = "1.0.140"
+
+[build-dependencies]
+cosmwasm-schema = "1.5.0"
+
+
+# Compilação de WebAssembly
+[profile.release]
+opt-level = "z"  # otimiza para tamanho
+lto = true       # link time optimization

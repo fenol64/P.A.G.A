@@ -1,0 +1,25 @@
+[package]
+name = "electors"
+description = "A smart contract for managing electors and their balances."
+version = "0.1.0"
+edition = "2021"
+
+# Configurações para o crate lib.rs
+[lib]
+path = "src/lib.rs"  # Aponte para 'lib.rs' dentro do diretório 'src'
+crate-type = ["cdylib", "rlib"]  # cdylib para gerar o .wasm (WebAssembly)
+
+# Dependências
+[dependencies]
+cosmwasm-std = { version = "1.5.11", features = ["staking"] } # Biblioteca padrão do CosmWasm
+cw-storage-plus = "1.1.0"      # Biblioteca para facilitar o gerenciamento de estado
+serde = { version = "1.0", features = ["derive"] } # Serialização e desserialização
+thiserror = "1"
+schemars = "0.8.1"
+cosmwasm-schema = "1.1.4"
+
+# Compilação de WebAssembly
+[profile.release]
+opt-level = "z"  # otimiza para tamanho
+lto = true       # link time optimization
+

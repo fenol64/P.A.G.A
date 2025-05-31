@@ -1,0 +1,11 @@
+/home/cassius/ruminante/P.A.G.A/target/debug/deps/libed25519_zebra-df398d7647855dc2.rmeta: /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ed25519-zebra-3.1.0/src/lib.rs /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ed25519-zebra-3.1.0/src/batch.rs /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ed25519-zebra-3.1.0/src/error.rs /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ed25519-zebra-3.1.0/src/signature.rs /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ed25519-zebra-3.1.0/src/signing_key.rs /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ed25519-zebra-3.1.0/src/verification_key.rs /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ed25519-zebra-3.1.0/src/../README.md
+
+/home/cassius/ruminante/P.A.G.A/target/debug/deps/ed25519_zebra-df398d7647855dc2.d: /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ed25519-zebra-3.1.0/src/lib.rs /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ed25519-zebra-3.1.0/src/batch.rs /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ed25519-zebra-3.1.0/src/error.rs /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ed25519-zebra-3.1.0/src/signature.rs /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ed25519-zebra-3.1.0/src/signing_key.rs /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ed25519-zebra-3.1.0/src/verification_key.rs /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ed25519-zebra-3.1.0/src/../README.md
+
+/home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ed25519-zebra-3.1.0/src/lib.rs:
+/home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ed25519-zebra-3.1.0/src/batch.rs:
+/home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ed25519-zebra-3.1.0/src/error.rs:
+/home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ed25519-zebra-3.1.0/src/signature.rs:
+/home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ed25519-zebra-3.1.0/src/signing_key.rs:
+/home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ed25519-zebra-3.1.0/src/verification_key.rs:
+/home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ed25519-zebra-3.1.0/src/../README.md:

@@ -1,0 +1,180 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ExecuteMsg",
+  "oneOf": [
+    {
+      "type": "object",
+      "required": [
+        "update_electors_contract"
+      ],
+      "properties": {
+        "update_electors_contract": {
+          "type": "object",
+          "required": [
+            "new_contract"
+          ],
+          "properties": {
+            "new_contract": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "update_politicians_contract"
+      ],
+      "properties": {
+        "update_politicians_contract": {
+          "type": "object",
+          "required": [
+            "new_contract"
+          ],
+          "properties": {
+            "new_contract": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "register_elector"
+      ],
+      "properties": {
+        "register_elector": {
+          "type": "object",
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "follow_politician"
+      ],
+      "properties": {
+        "follow_politician": {
+          "type": "object",
+          "required": [
+            "politician_address"
+          ],
+          "properties": {
+            "politician_address": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "register_politician"
+      ],
+      "properties": {
+        "register_politician": {
+          "type": "object",
+          "required": [
+            "role"
+          ],
+          "properties": {
+            "role": {
+              "$ref": "#/definitions/PoliticianRole"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "create_promise"
+      ],
+      "properties": {
+        "create_promise": {
+          "type": "object",
+          "required": [
+            "description",
+            "title"
+          ],
+          "properties": {
+            "conclusion_date": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "format": "uint64",
+              "minimum": 0.0
+            },
+            "description": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "vote_on_promisse"
+      ],
+      "properties": {
+        "vote_on_promisse": {
+          "type": "object",
+          "required": [
+            "politician_address",
+            "promise_id",
+            "vote"
+          ],
+          "properties": {
+            "politician_address": {
+              "type": "string"
+            },
+            "promise_id": {
+              "type": "integer",
+              "format": "uint64",
+              "minimum": 0.0
+            },
+            "vote": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  ],
+  "definitions": {
+    "PoliticianRole": {
+      "type": "string",
+      "enum": [
+        "vereador",
+        "deputado_estadual",
+        "deputado_federal",
+        "governador",
+        "senador",
+        "presidente"
+      ]
+    }
+  }
+}

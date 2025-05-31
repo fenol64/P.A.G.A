@@ -1,0 +1,25 @@
+# neutrond tx wasm store /paga.wasm \
+#   --from mywallet \
+#   --keyring-backend test \
+#   --home ./data/test-1 \
+#   --gas auto --gas-adjustment 1.3 \
+#   --chain-id test-1 \
+#   --broadcast-mode async \
+#   --yes
+
+
+# neutrond tx wasm instantiate <code_id> \
+#   '{"owner":"neutron1x8y240crs906dcs6l8hzqnwapy0ns05n7utcyq"}' \
+#   --from mywallet \
+#   --label "paga-contract" \
+#   --keyring-backend test \
+#   --home ./data/test-1 \
+#   --gas auto --gas-adjustment 1.3 \
+#   --chain-id test-1 \
+#   --broadcast-mode block \
+#   --yes
+
+
+PAGA: neutron1ue6f8e2de7nlacdjcj2j20lcztffetapp3gtatleknjwg2cvw43skr9a72
+Electors: neutron1u6shqnk4k5fza2exaet4gyczc4td8drnnclgu0ngn00lurmlu3tqpwjugm
+Politicians: neutron1f8gs4rp232ngyta3g2efwfkznymvv85du7qm9y0mhvjxpp3cq68qgquudm
