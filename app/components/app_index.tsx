@@ -338,7 +338,7 @@ export default function HomePage({ ...props }) {
 
             <div className="bg-light text-dark rounded-5 p-4">
               <p>
-                We use <b>blockchain technology</b> to ensure <b>transparency and security</b> of data.
+                We use <b>Cosmos Neutron blockchain technology</b> to ensure <b>transparency and security</b> of data.
                 This way, each vote and promise is unique and immutable.
               </p>
               <p>And to vote and comment, authentication is required.</p>

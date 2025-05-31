@@ -12,6 +12,7 @@ import {
 } from "@/components/LayoutComponents";
 import db from "@/data/db.json";
 import { humanDate, humanDatePast } from "@/src/utils";
+import Link from "next/link";
 
 // import { Container } from './styles';
 
@@ -98,7 +99,9 @@ function comunidade() {
         className="navbar navbar-dark bg-blue p-0 fixed-top rounded-bottom-5"
       >
         <div className="container-fluid p-3 px-5">
+        <Link href="/" className="navbar-brand m-0">
           <h1 className="navbar-brand m-0 fw-bold">PAGA</h1>
+        </Link>
         </div>
       </header>
       <div
