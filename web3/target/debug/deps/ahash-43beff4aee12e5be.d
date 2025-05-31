@@ -1,10 +1,16 @@
+<<<<<<< HEAD
 /home/cassius/ruminante/paga2/web3/target/debug/deps/libahash-43beff4aee12e5be.rmeta: /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/lib.rs /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/convert.rs /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/fallback_hash.rs /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/operations.rs /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/random_state.rs /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/specialize.rs
 
 /home/cassius/ruminante/paga2/web3/target/debug/deps/ahash-43beff4aee12e5be.d: /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/lib.rs /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/convert.rs /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/fallback_hash.rs /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/operations.rs /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/random_state.rs /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/specialize.rs
+=======
+/home/labs42/fnascime/ruminante/paga/paga_front_end/web3/target/debug/deps/libahash-43beff4aee12e5be.rmeta: /home/labs42/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/lib.rs /home/labs42/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/convert.rs /home/labs42/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/fallback_hash.rs /home/labs42/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/operations.rs /home/labs42/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/random_state.rs /home/labs42/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/specialize.rs
 
-/home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/lib.rs:
-/home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/convert.rs:
-/home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/fallback_hash.rs:
-/home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/operations.rs:
-/home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/random_state.rs:
-/home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/specialize.rs:
+/home/labs42/fnascime/ruminante/paga/paga_front_end/web3/target/debug/deps/ahash-43beff4aee12e5be.d: /home/labs42/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/lib.rs /home/labs42/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/convert.rs /home/labs42/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/fallback_hash.rs /home/labs42/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/operations.rs /home/labs42/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/random_state.rs /home/labs42/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/specialize.rs
+>>>>>>> c8d3b2d182e962643a5a73675f14cd61eedf6d0c
+
+/home/labs42/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/lib.rs:
+/home/labs42/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/convert.rs:
+/home/labs42/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/fallback_hash.rs:
+/home/labs42/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/operations.rs:
+/home/labs42/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/random_state.rs:
+/home/labs42/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.7.8/src/specialize.rs:

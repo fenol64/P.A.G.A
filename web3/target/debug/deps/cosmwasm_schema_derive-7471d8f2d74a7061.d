@@ -1,9 +1,15 @@
+<<<<<<< HEAD
 /home/cassius/ruminante/paga2/web3/target/debug/deps/libcosmwasm_schema_derive-7471d8f2d74a7061.so: /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cosmwasm-schema-derive-1.5.11/src/lib.rs /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cosmwasm-schema-derive-1.5.11/src/cw_serde.rs /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cosmwasm-schema-derive-1.5.11/src/generate_api.rs /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cosmwasm-schema-derive-1.5.11/src/query_responses.rs /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cosmwasm-schema-derive-1.5.11/src/query_responses/context.rs
 
 /home/cassius/ruminante/paga2/web3/target/debug/deps/cosmwasm_schema_derive-7471d8f2d74a7061.d: /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cosmwasm-schema-derive-1.5.11/src/lib.rs /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cosmwasm-schema-derive-1.5.11/src/cw_serde.rs /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cosmwasm-schema-derive-1.5.11/src/generate_api.rs /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cosmwasm-schema-derive-1.5.11/src/query_responses.rs /home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cosmwasm-schema-derive-1.5.11/src/query_responses/context.rs
+=======
+/home/labs42/fnascime/ruminante/paga/paga_front_end/web3/target/debug/deps/libcosmwasm_schema_derive-7471d8f2d74a7061.so: /home/labs42/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cosmwasm-schema-derive-1.5.11/src/lib.rs /home/labs42/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cosmwasm-schema-derive-1.5.11/src/cw_serde.rs /home/labs42/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cosmwasm-schema-derive-1.5.11/src/generate_api.rs /home/labs42/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cosmwasm-schema-derive-1.5.11/src/query_responses.rs /home/labs42/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cosmwasm-schema-derive-1.5.11/src/query_responses/context.rs
 
-/home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cosmwasm-schema-derive-1.5.11/src/lib.rs:
-/home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cosmwasm-schema-derive-1.5.11/src/cw_serde.rs:
-/home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cosmwasm-schema-derive-1.5.11/src/generate_api.rs:
-/home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cosmwasm-schema-derive-1.5.11/src/query_responses.rs:
-/home/cassius/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cosmwasm-schema-derive-1.5.11/src/query_responses/context.rs:
+/home/labs42/fnascime/ruminante/paga/paga_front_end/web3/target/debug/deps/cosmwasm_schema_derive-7471d8f2d74a7061.d: /home/labs42/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cosmwasm-schema-derive-1.5.11/src/lib.rs /home/labs42/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cosmwasm-schema-derive-1.5.11/src/cw_serde.rs /home/labs42/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cosmwasm-schema-derive-1.5.11/src/generate_api.rs /home/labs42/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cosmwasm-schema-derive-1.5.11/src/query_responses.rs /home/labs42/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cosmwasm-schema-derive-1.5.11/src/query_responses/context.rs
+>>>>>>> c8d3b2d182e962643a5a73675f14cd61eedf6d0c
+
+/home/labs42/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cosmwasm-schema-derive-1.5.11/src/lib.rs:
+/home/labs42/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cosmwasm-schema-derive-1.5.11/src/cw_serde.rs:
+/home/labs42/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cosmwasm-schema-derive-1.5.11/src/generate_api.rs:
+/home/labs42/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cosmwasm-schema-derive-1.5.11/src/query_responses.rs:
+/home/labs42/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cosmwasm-schema-derive-1.5.11/src/query_responses/context.rs:

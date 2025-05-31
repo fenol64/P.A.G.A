@@ -16,6 +16,8 @@
   },
   "dependencies": {
     "@chain-registry/types": "^0.50.18",
+    "@cosmjs/cosmwasm-stargate": "^0.33.1",
+    "@cosmjs/stargate": "^0.33.1",
     "@emotion/react": "11.10.6",
     "@emotion/styled": "11.10.6",
     "@interchain-kit/core": "0.2.222",
