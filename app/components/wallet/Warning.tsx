@@ -7,11 +7,14 @@ import {
   useColorModeValue,
 } from "@interchain-ui/react";
 
-
+export type WarningProps = {
+  text: string;
+  icon?: ReactNode;
+};
 
 export const WarningIcon = <Icon name="errorWarningLine" size="$lg" />;
 
-export function Warning({ text, icon = WarningIcon }) {
+export function Warning({ text, icon = WarningIcon }: WarningProps) {
   return (
     <Box
       p="$6"

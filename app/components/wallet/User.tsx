@@ -2,8 +2,12 @@ import { ReactNode } from "react";
 import { Box, Stack, Text, useColorModeValue } from "@interchain-ui/react";
 import { Astronaut } from "./Astronaut";
 
+export type UserProps = {
+  name: string;
+  icon?: ReactNode;
+};
 
-export function User({ name, icon = <Astronaut /> }) {
+export function User({ name, icon = <Astronaut /> }: UserProps) {
   return (
     <Stack direction="vertical">
       <Box width="$19" height="$19" mx="auto" borderRadius="$full">

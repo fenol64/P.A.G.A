@@ -1,5 +1,5 @@
 import localforage from "localforage";
-import Web3 from "web3";
+// import Web3 from "web3";
 
 export class CustomError extends Error {
     constructor(message, statusCode) {
@@ -9,13 +9,13 @@ export class CustomError extends Error {
 }
 
 export const getWeb3Provider = async (magic) => {
-    if (magic && (await localforage.getItem("type") === "magic")) {
-        return new Web3(magic.rpcProvider);
-    }
+    // if (magic && (await localforage.getItem("type") === "magic")) {
+    //     return new Web3(magic.rpcProvider);
+    // }
 
-    if (await localforage.getItem("type") === "metamask") {
-        return new Web3(window.ethereum);
-    }
+    // if (await localforage.getItem("type") === "metamask") {
+    //     return new Web3(window.ethereum);
+    // }
 
     return null;
 }

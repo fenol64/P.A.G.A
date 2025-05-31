@@ -1,3 +1,5 @@
+"use client";
+
 import localforage from "localforage";
 import number_format from "locutus/php/strings/number_format";
 import React, { useEffect } from "react";
@@ -7,12 +9,53 @@ import {
   Container,
   ModalCloseButton,
   UserProfilePicture,
-} from "root/components/LayoutComponents";
-import db from "root/data/db.json";
-import { humanDate, humanDatePast } from "root/src/utils";
-import { ToastMessage } from "..";
+} from "@/components/LayoutComponents";
+import db from "@/data/db.json";
+import { humanDate, humanDatePast } from "@/src/utils";
 
 // import { Container } from './styles';
+
+function ToastMessage({ message, type, iconName }) {
+    try {
+      const bodyElement = document.querySelector("body");
+
+      var toastElementContainer = document.querySelector(".toast-container");
+      if (!toastElementContainer) {
+        toastElementContainer = document.createElement("div");
+        toastElementContainer.className =
+          "toast-container position-fixed bottom-0 end-0 p-3";
+        bodyElement.appendChild(toastElementContainer);
+      }
+
+      const toastElement = document.createElement("div");
+      toastElement.className = `toast bg-${type}`;
+      if (type == "danger" || type == "success")
+        toastElement.classList.add("text-white");
+      else toastElement.classList.add("text-dark");
+      toastElement.onclick = () => toastElement.remove();
+      toastElementContainer.appendChild(toastElement);
+
+      toastElement.innerHTML = `
+              <div class="d-flex flex-row gap-2 align-items-center p-3">
+                  <i class="${iconName} me-2"></i>
+                  <strong class="me-auto">${message}</strong>
+              </div>
+          `;
+      const toast = new bootstrap.Toast(toastElement);
+      toast.show();
+
+      toastElement.addEventListener("shown.bs.toast", () => {
+        setTimeout(() => toast.hide(), 5000);
+      });
+      toastElement.addEventListener("hidden.bs.toast", () => {
+        toastElement.remove();
+      });
+
+      return toastElement;
+    } catch (error) {
+      console.error("Erro ao criar toast:", error);
+    }
+  }
 
 function comunidade() {
   const [commitments, setCommitments] = React.useState([]);

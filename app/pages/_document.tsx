@@ -12,7 +12,7 @@ export default function DocumentContainer() {
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
             </Head>
             <body className="bg-light">
-    <Container maxWidth="64rem" attributes={{ py: '$14' }}>
+    <Container attributes={{ py: '$14' }}>
                 <Main />
     </Container>
                 <NextScript />

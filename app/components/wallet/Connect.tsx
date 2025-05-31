@@ -1,6 +1,15 @@
 import { MouseEventHandler } from "react";
 import { Button as UIButton, IconName } from "@interchain-ui/react";
 
+export type ButtonProps = {
+  text?: string;
+  icon?: IconName;
+  loading?: boolean;
+  disabled?: boolean;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
+};
+
+export type ConnectProps = Pick<ButtonProps, "text" | "loading" | "onClick">;
 
 function noop() {}
 
@@ -10,7 +19,7 @@ export function Button({
   loading,
   disabled,
   onClick = noop,
-}) {
+}: ButtonProps) {
   return (
     <UIButton
       onClick={onClick}
@@ -19,7 +28,6 @@ export function Button({
       isLoading={loading}
       domAttributes={{
         style: {
-          flex: 1,
           backgroundImage:
             "linear-gradient(109.6deg, rgba(157,75,199,1) 11.2%, rgba(119,81,204,1) 83.1%)",
         },
@@ -31,29 +39,29 @@ export function Button({
 }
 
 export const ButtonConnect = (
-  { text = "Connect Wallet", onClick = noop },
+  { text = "Connect Wallet", onClick = noop }: ConnectProps,
 ) => <Button text={text} icon="walletFilled" onClick={onClick} />;
 
 export const ButtonConnected = (
-  { text = "My Wallet", onClick = noop },
+  { text = "My Wallet", onClick = noop }: ConnectProps,
 ) => <Button text={text} icon="walletFilled" onClick={onClick} />;
 
 export const ButtonDisconnected = (
-  { text = "Connect Wallet", onClick = noop },
+  { text = "Connect Wallet", onClick = noop }: ConnectProps,
 ) => <Button text={text} icon="walletFilled" onClick={onClick} />;
 
 export const ButtonConnecting = (
-  { text = "Connecting ...", loading = true },
+  { text = "Connecting ...", loading = true }: ConnectProps,
 ) => <Button text={text} loading={loading} />;
 
 export const ButtonRejected = (
-  { text = "Reconnect", onClick = noop },
+  { text = "Reconnect", onClick = noop }: ConnectProps,
 ) => <Button text={text} icon="walletFilled" onClick={onClick} />;
 
 export const ButtonError = (
-  { text = "Change Wallet", onClick = noop },
+  { text = "Change Wallet", onClick = noop }: ConnectProps,
 ) => <Button text={text} icon="walletFilled" onClick={onClick} />;
 
 export const ButtonNotExist = (
-  { text = "Install Wallet", onClick = noop },
+  { text = "Install Wallet", onClick = noop }: ConnectProps,
 ) => <Button text={text} icon="walletFilled" onClick={onClick} />;

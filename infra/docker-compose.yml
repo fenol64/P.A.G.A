@@ -5,11 +5,11 @@ services:
       dockerfile: ./infra/app/Dockerfile
     container_name: paga_app
     ports:
-      - "3554:3554"
+      - "3000:3000"
   hardhat:
     build:
       context: ..
-      dockerfile: ./infra/hardhat/Dockerfile
-    container_name: paga_hardhat
+      dockerfile: ./infra/neutron_node/Dockerfile
+    container_name: paga_neutron_node
     ports:
       - "8545:8545"

@@ -7,17 +7,15 @@ import {
   ModalCloseButton,
   Navbar,
   UserProfilePicture,
-} from "root/components/LayoutComponents";
+} from "@/components/LayoutComponents";
 
 export const CHAIN_NAME = "cosmoshub";
 export const CHAIN_NAME_STORAGE_KEY = "selected-chain";
-import mock from "root/data/db.json";
-import { humanDate, humanDatePast } from "root/src/utils";
-import { useMagic } from "./_app";
+import { humanDate, humanDatePast } from "@/src/utils";
 import localforage from "localforage";
-import mainController from "root/src/controllers/mainController";
+import mainController from "@/src/controllers/mainController";
 import Link from "next/link";
-import { Wallet } from "root/components/wallet";
+import { useChain } from "@interchain-kit/react";
 
 export function ToastMessage({ message, type, iconName }) {
   try {
@@ -67,7 +65,7 @@ export default function HomePage({ ...props }) {
   const [userHash, setUserHash] = useState(null);
   const [users, setUsers] = useState(props?.users ?? {});
   const [openAddPromiseModal, setOpenAddPromiseModal] = useState(false);
-  const { magic } = useMagic();
+//   const { magic } = useMagic();
 
   const [votedCommitments, setVotedCommitments] = useState({});
 
@@ -92,25 +90,25 @@ export default function HomePage({ ...props }) {
   const metaMaskAuth = async () => {
     try {
       if (typeof window.ethereum !== "undefined") {
-        const maincontroller = await new mainController();
-        await maincontroller.init();
-        const user_addr = await maincontroller.connectMetamask();
-        await localforage.setItem("userHash", user_addr.account);
-        await localforage.setItem("type", "metamask");
-        setUser(user_addr);
+        // const maincontroller = await new mainController();
+        // await maincontroller.init();
+        // const user_addr = await maincontroller.connectMetamask();
+        // await localforage.setItem("userHash", user_addr.account);
+        // await localforage.setItem("type", "metamask");
+        // setUser(user_addr);
 
         await authenticatedFeedback();
       } else {
         ToastMessage({
-          message: "MetaMask não está instalado em seu dispositivo.",
+          message: "MetaMask is not installed on your device.",
           type: "warning",
           iconName: "fal fa-exclamation-triangle",
         });
       }
     } catch (error) {
-      console.error("Erro ao conectar com Metamask:", error);
+      console.error("Error connecting to MetaMask:", error);
       ToastMessage({
-        message: "Erro ao conectar com Metamask.",
+        message: "Error connecting to MetaMask.",
         type: "danger",
         iconName: "fal fa-exclamation-triangle",
       });
@@ -135,13 +133,13 @@ export default function HomePage({ ...props }) {
       console.error(error.toString().includes("canceled"));
       if (error?.toString()?.includes("canceled")) {
         ToastMessage({
-          message: "Conexão com Magic Link cancelada.",
+          message: "Magic Link connection canceled.",
           type: "warning",
           iconName: "fal fa-exclamation-triangle",
         });
       } else {
         ToastMessage({
-          message: "Erro ao conectar com Magic Link.",
+          message: "Error connecting to Magic Link.",
           type: "danger",
           iconName: "fal fa-exclamation-triangle",
         });
@@ -155,7 +153,7 @@ export default function HomePage({ ...props }) {
       setUserHash(userHash);
 
       ToastMessage({
-        message: "Autenticado com sucesso.",
+        message: "Successfully authenticated.",
         type: "success",
         iconName: "fal fa-check",
       });
@@ -172,20 +170,6 @@ export default function HomePage({ ...props }) {
     }
   };
 
-  const logoutFeedback = async () => {
-    await localforage.removeItem("userHash");
-    setUserHash(null);
-    setUser(null);
-
-    setBalance(0);
-    setVotedCommitments({});
-
-    ToastMessage({
-      message: "Desconectado com sucesso!",
-      type: "info",
-      iconName: "fal fa-check",
-    });
-  };
 
   const openOrCloseModal = (modalId) => {
     const modal = bootstrap.Modal.getOrCreateInstance(
@@ -208,12 +192,12 @@ export default function HomePage({ ...props }) {
       const res = {};
 
       if (res?.error) {
-        alert("Erro ao votar na promessa.");
+        alert("Error voting on the promise.");
         return;
       }
 
       ToastMessage({
-        message: "Voto aplicado com sucesso!",
+        message: "Vote applied successfully!",
         type: "success",
         iconName: "fal fa-check",
       });
@@ -236,7 +220,7 @@ export default function HomePage({ ...props }) {
       setVotedCommitments({ ...votedCommitments, [commitmentId]: vote });
       // openOrCloseModal("modalCommitment").close();
     } else {
-      alert("Você precisa estar autenticado para votar.");
+      alert("You need to be authenticated to vote.");
       openOrCloseModal("modalAuth").open();
       return;
     }
@@ -282,15 +266,31 @@ export default function HomePage({ ...props }) {
       (async () => await localforage.setItem("balance", balance))();
   }, [balance]);
 
+    const {
+      chain,
+      status,
+      wallet,
+      username,
+      address,
+      message,
+      connect,
+      openView,
+    } = useChain(CHAIN_NAME);
     const [chainName, setChainName] = useState(CHAIN_NAME);
 
   function onChainChange(chainName) {
     setChainName(chainName);
   }
+  console.log("wallet", address);
 
+  useEffect(() => {
+    if (!address) return;
+    setUserHash(address)
+    localforage.setItem("userHash", address);
+  }, [address]);
   return (
       <main className="">
-        <Wallet chainName={chainName} onChainChange={onChainChange} />
+        {/* <Wallet chainName={chainName} onChainChange={onChainChange} /> */}
       {/* <Navbar pageTitle="P.A.G.A." /> */}
       <section
         id="pageHeaderContainer"
@@ -298,22 +298,22 @@ export default function HomePage({ ...props }) {
       >
         <header
           id="pageHeader"
-          className="navbar navbar-dark bg-blue p-0 fixed-top rounded-bottom-5"
+          className="navbar navbar-dark bg-blue p-0 fixed-top rounded-bottom-5 d-flex flex-row "
         >
+         {/* <Wallet /> */}
           <div className="container-fluid p-3 px-5">
             <h1 className="navbar-brand m-0 fw-bold">PAGA</h1>
-
             {userHash && (
               <div className="d-flex flex-row gap-3 align-items-center ms-auto">
                 <span className="badge bg-green fs-6">
-                  <i className="fal fa-coins me-1" /> {balance ?? 0} PC
+                  <i className="fal fa-coins me-1" /> {balance ?? 0} ATOM
                 </span>
                 <Button
-                  color="danger"
-                  iconName="fal fa-sign-out"
-                  size="md"
+                  iconName="fal fa-eye"
+                  size="sm"
+                  label={"View Wallet"}
                   rounded="2"
-                  onClick={logoutFeedback}
+                  onClick={connect}
                 />
               </div>
             )}
@@ -322,13 +322,12 @@ export default function HomePage({ ...props }) {
 
         <Container>
           <hgroup className="text-center text-md-start mt-3">
-            <h2 className="h3 text-white">Promessa Assinada Gera Atitude</h2>
+            <h2 className="h3 text-white">Signed Promise Generates Attitude</h2>
             <div className="lead text-light">
               <p>
-                Aqui você pode acompanhar as promessas feitas por políticos,
-                informar se foram cumpridas.
+                Here you can track promises made by politicians and inform if they were fulfilled.
               </p>
-              <p>Faça parte da mudança!</p>
+              <p>Be part of the change!</p>
             </div>
           </hgroup>
 
@@ -339,31 +338,32 @@ export default function HomePage({ ...props }) {
 
             <div className="bg-light text-dark rounded-5 p-4">
               <p>
-                Utilizamos a <b>tecnologia blockchain</b> para garantir a{" "}
-                <b>transparência e segurança</b> dos dados. Desta forma, cada
-                voto e promessa é único e imutável.
+                We use <b>blockchain technology</b> to ensure <b>transparency and security</b> of data.
+                This way, each vote and promise is unique and immutable.
               </p>
-              <p>E para votar e comentar é necessário autenticar-se.</p>
+              <p>And to vote and comment, authentication is required.</p>
             </div>
           </div>
 
           {userHash ? (
             <div className="d-flex flex-column gap-3 align-items-center">
-              <h3 className="text-center">Você está autenticado em crypto!</h3>
+              <h3 className="text-center">You are authenticated in crypto!</h3>
             </div>
           ) : (<>
             <Button
               color="light"
-              label="Entrar para votar"
+              label="Sign in to vote"
               iconName="fal fa-fingerprint"
               className="btn-block w-100"
               size="lg"
               rounded="pill p-3"
-              modal="#modalAuth"
+              onClick={() => {
+                connect();
+              }}
             />
             <p className="text-center text-white">
                     <Link href="/cadastro" className="text-white h4 text-decoration-none">
-                ou <span className="text-decoration-underline">crie uma conta</span>
+                or <span className="text-decoration-underline">create an account</span>
             </Link>
             </p>
     </>
@@ -376,7 +376,7 @@ export default function HomePage({ ...props }) {
           header={<>
 
           </>}
-          title="Promessas Recentes"
+          title="Recent Promises"
           iconName="fal fa-bullhorn"
           className={"gap-4"}
         >
@@ -404,7 +404,7 @@ export default function HomePage({ ...props }) {
                   type="text"
                   name="search"
                   className="form-control rounded-pill form-control-lg"
-                  placeholder="Buscar promessas..."
+                  placeholder="Search promises..."
                 />
               </div>
               <div className="col-12 col-md-5">
@@ -412,9 +412,9 @@ export default function HomePage({ ...props }) {
                   name="commitment_status"
                   className="form-select rounded-pill form-select-lg"
                 >
-                  <option value="">Todas as promessas</option>
-                  <option value="finished">Promessas cumpridas</option>
-                  <option value="expired">Promessas não cumpridas</option>
+                  <option value="">All promises</option>
+                  <option value="finished">Fulfilled promises</option>
+                  <option value="expired">Unfulfilled promises</option>
                 </select>
               </div>
               <div className="col-12 col-md">
@@ -431,14 +431,14 @@ export default function HomePage({ ...props }) {
             <Link href={"/comunidade"} >
                 <h3 className="d-block text-center text-decoration-none text-black h4">
                     <i className="fal fa-eye me-1"></i>
-                    Ver Promessas feitas comunidade
+                    View Community Promises
                 </h3>
             </Link>
           <div className="d-flex flex-column gap-4">
             {commitmentsFiltred?.length === 0 ? (
               <AlertMessage
                 type="info"
-                message="Nenhuma promessa encontrada."
+                message="No promises found."
                 iconName="fal fa-info-circle"
               />
             ) : (
@@ -547,7 +547,7 @@ export default function HomePage({ ...props }) {
                       />
                     )}
                     <h2 className="navbar-brand text-uppercase text-center w-100 m-2">
-                      Detalhes da Promessa
+                      Promise Details
                     </h2>
                   </header>
                   <div className="modal-body p-3">
@@ -611,10 +611,10 @@ export default function HomePage({ ...props }) {
                                 ? "success"
                                 : "warning"
                             } text-center justify`}
-                            message={`Você já votou nesta promessa como ${
+                            message={`You have already voted on this promise as ${
                               votedCommitments[commitment.id] == 1
-                                ? "Promessa cumprida"
-                                : "Promessa não cumprida"
+                                ? "Promise fulfilled"
+                                : "Promise not fulfilled"
                             }`}
                             iconName="fal fa-info-circle"
                           />
@@ -622,7 +622,7 @@ export default function HomePage({ ...props }) {
                       ) : (
                         <>
                           <h3 className="w-100 text-center">
-                            A promessa foi cumprida?
+                            Was the promise fulfilled?
                           </h3>
                           <div className="d-flex flex-row gap-3 w-100 align-items-center justify-content-center p-3">
                             <Button
@@ -647,7 +647,7 @@ export default function HomePage({ ...props }) {
                     <footer className="modal-footer border-0 text-center">
                       <Button
                         color="light"
-                        label="Entrar para votar"
+                        label="Sign in to vote"
                         iconName="fal fa-fingerprint"
                         className="btn-block w-100"
                         border="2"
@@ -705,13 +705,13 @@ export default function HomePage({ ...props }) {
                         </hgroup>
 
                         <ul className="list-inline d-flex gap-3 flex-wrap">
-                          <li>Promessas feitas: 7</li>
-                          <li>Promessas cumpridas: 1</li>
+                          <li>Promises made: 7</li>
+                          <li>Promises fulfilled: 1</li>
                         </ul>
                       </div>
                     </div>
                     <div className="text-start mt-5">
-                      <h5>Promessas</h5>
+                      <h5>Promises</h5>
                       <ul className="list-group">
                         {commitmentsOfPolitician(politician.id)?.map(
                           (commitment, index) => {
@@ -760,10 +760,9 @@ export default function HomePage({ ...props }) {
             </header>
             <div className="modal-body p-3">
               <div className="d-flex flex-column gap-3 align-items-center">
-                <h3 className="modal-title">Autenticação</h3>
+                <h3 className="modal-title">Authentication</h3>
                 <p className="lead">
-                  Para votar e comentar é necessário autenticar-se. Escolha um
-                  dos serviços abaixo para:
+                  To vote and comment, authentication is required. Choose one of the services below:
                 </p>
                 <Button
                   color="light"
@@ -778,7 +777,7 @@ export default function HomePage({ ...props }) {
                 <Button
                   color="light"
                   border="2 border-dark"
-                  label="Conta Google"
+                  label="Google Account"
                   className="btn-block w-100"
                   size="lg"
                   rounded="pill p-3"
@@ -797,21 +796,4 @@ export default function HomePage({ ...props }) {
   );
 }
 
-export function getServerSideProps(ctx) {
-  const props = {};
 
-  props.users = {};
-  mock.users.map((user) => {
-    props.users[user.id] = user;
-  });
-
-  props.commitments = mock.commitments?.map((commitment) => {
-    commitment.author = props.users[commitment.authorId] ?? null;
-    return commitment;
-  });
-
-  props.claims = [];
-  return {
-    props,
-  };
-}

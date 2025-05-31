@@ -3,8 +3,8 @@
         {
             "id": 1,
             "profilePictureURI": "https://apphub.com.br/pp.png",
-            "name": "Marcelo Duarte - PA",
-            "politicianRole": "Presidente",
+            "name": "John Smith - DR",
+            "politicianRole": "President",
             "role": "POLITICIAN",
             "createdAt": "2025-01-01T00:00:00Z",
             "updatedAt": "2025-01-10T00:00:00Z"
@@ -12,8 +12,8 @@
         {
             "id": 2,
             "profilePictureURI": "https://apphub.com.br/pp.png",
-            "name": "Katia Ferreira - PA",
-            "politicianRole": "Governador",
+            "name": "Sarah Johnson - DR",
+            "politicianRole": "Governor",
             "role": "POLITICIAN",
             "createdAt": "2025-01-05T00:00:00Z",
             "updatedAt": "2025-01-12T00:00:00Z"
@@ -21,8 +21,8 @@
         {
             "id": 3,
             "profilePictureURI": "https://apphub.com.br/pp.png",
-            "name": "Rodrigo Menezes - PD",
-            "politicianRole": "Senador",
+            "name": "Michael Williams - DP",
+            "politicianRole": "Senator",
             "role": "POLITICIAN",
             "createdAt": "2025-01-07T00:00:00Z",
             "updatedAt": "2025-01-14T00:00:00Z"
@@ -30,8 +30,8 @@
         {
             "id": 4,
             "profilePictureURI": "https://apphub.com.br/pp.png",
-            "name": "Fernanda Lopes - PD",
-            "politicianRole": "Deputado",
+            "name": "Emily Davis - DP",
+            "politicianRole": "Representative",
             "role": "POLITICIAN",
             "createdAt": "2025-01-09T00:00:00Z",
             "updatedAt": "2025-01-16T00:00:00Z"
@@ -39,8 +39,8 @@
         {
             "id": 5,
             "profilePictureURI": "https://apphub.com.br/pp.png",
-            "name": "Carlos Nascimento - PE",
-            "politicianRole": "Vereador",
+            "name": "Robert Brown - DI",
+            "politicianRole": "City Council Member",
             "role": "POLITICIAN",
             "createdAt": "2025-01-10T00:00:00Z",
             "updatedAt": "2025-01-17T00:00:00Z"
@@ -50,8 +50,8 @@
         {
             "id": 1,
             "authorId": 1,
-            "title": "Construir novas escolas",
-            "description": "Construir escolas em regiões mais carentes para melhorar a educação.",
+            "title": "Build New Schools",
+            "description": "Build schools in underprivileged areas to improve education.",
             "status": "ACTIVE",
             "endDate": "2026-12-31T00:00:00Z",
             "createdAt": "2025-01-01T00:00:00Z",
@@ -60,8 +60,8 @@
         {
             "id": 2,
             "authorId": 1,
-            "title": "Aumentar o salário dos professores",
-            "description": "Ajustar os salários dos professores para melhorar a qualidade de ensino.",
+            "title": "Increase Teacher Salaries",
+            "description": "Adjust teacher salaries to improve education quality.",
             "status": "PENDING",
             "endDate": "2025-12-31T00:00:00Z",
             "createdAt": "2025-01-02T00:00:00Z",
@@ -70,8 +70,8 @@
         {
             "id": 3,
             "authorId": 2,
-            "title": "Construir hospitais",
-            "description": "Construir hospitais em áreas afastadas e melhorar o sistema de saúde.",
+            "title": "Build Hospitals",
+            "description": "Build hospitals in remote areas and improve the healthcare system.",
             "status": "ACTIVE",
             "endDate": "2026-06-30T00:00:00Z",
             "createdAt": "2025-01-03T00:00:00Z",
@@ -80,8 +80,8 @@
         {
             "id": 4,
             "authorId": 2,
-            "title": "Aumentar a segurança pública",
-            "description": "Investir mais em segurança para reduzir a criminalidade nas grandes cidades.",
+            "title": "Enhance Public Safety",
+            "description": "Invest more in security to reduce crime rates in major cities.",
             "status": "ACTIVE",
             "endDate": "2026-06-30T00:00:00Z",
             "createdAt": "2025-01-04T00:00:00Z",
@@ -90,8 +90,8 @@
         {
             "id": 5,
             "authorId": 3,
-            "title": "Reformar estradas estaduais",
-            "description": "Reformar estradas estaduais para garantir mais segurança no trânsito.",
+            "title": "Repair State Highways",
+            "description": "Repair state highways to ensure better traffic safety.",
             "status": "PENDING",
             "endDate": "2025-12-31T00:00:00Z",
             "createdAt": "2025-01-06T00:00:00Z",
@@ -100,8 +100,8 @@
         {
             "id": 6,
             "authorId": 3,
-            "title": "Melhorar o transporte público",
-            "description": "Ampliar e melhorar a qualidade do transporte público para reduzir o tráfego.",
+            "title": "Improve Public Transportation",
+            "description": "Expand and improve public transportation quality to reduce traffic.",
             "status": "PENDING",
             "endDate": "2025-12-31T00:00:00Z",
             "createdAt": "2025-01-07T00:00:00Z",
@@ -110,8 +110,8 @@
         {
             "id": 7,
             "authorId": 4,
-            "title": "Apoiar pequenas empresas",
-            "description": "Criar incentivos fiscais para apoiar as pequenas empresas e empreendedores.",
+            "title": "Support Small Businesses",
+            "description": "Create tax incentives to support small businesses and entrepreneurs.",
             "status": "ACTIVE",
             "endDate": "2025-06-30T00:00:00Z",
             "createdAt": "2025-01-08T00:00:00Z",
@@ -120,8 +120,8 @@
         {
             "id": 8,
             "authorId": 4,
-            "title": "Criar programas de habitação popular",
-            "description": "Criar programas de habitação popular para famílias de baixa renda.",
+            "title": "Create Affordable Housing Programs",
+            "description": "Create affordable housing programs for low-income families.",
             "status": "ACTIVE",
             "endDate": "2025-06-30T00:00:00Z",
             "createdAt": "2025-01-09T00:00:00Z",
@@ -130,8 +130,8 @@
         {
             "id": 9,
             "authorId": 5,
-            "title": "Melhorar a educação infantil",
-            "description": "Investir na educação infantil para garantir uma base sólida para as crianças.",
+            "title": "Improve Early Childhood Education",
+            "description": "Invest in early childhood education to ensure a solid foundation for children.",
             "status": "PENDING",
             "endDate": "2025-12-31T00:00:00Z",
             "createdAt": "2025-01-10T00:00:00Z",
@@ -139,20 +139,20 @@
         }
     ],
     "users_commitments": [
-            {
+        {
             "id": 1,
             "authorId": 1,
             "author": {
                 "id": 1,
                 "profilePictureURI": "https://apphub.com.br/pp.png",
-                "name": "Marcelo Duarte",
+                "name": "John Smith",
                 "politicianRole": "",
                 "role": "POLITICIAN",
                 "createdAt": "2025-01-01T00:00:00Z",
                 "updatedAt": "2025-01-10T00:00:00Z"
             },
-            "title": "Construir novas escolas",
-            "description": "Construir escolas em regiões mais carentes para melhorar a educação.",
+            "title": "Build New Schools",
+            "description": "Build schools in underprivileged areas to improve education.",
             "status": "ACTIVE",
             "endDate": "2026-12-31T00:00:00Z",
             "createdAt": "2025-01-01T00:00:00Z",
@@ -164,17 +164,17 @@
         {
             "id": 2,
             "authorId": 1,
-                        "author": {
+            "author": {
                 "id": 1,
                 "profilePictureURI": "https://apphub.com.br/pp.png",
-                "name": "Jéssica Almeida",
+                "name": "Jessica Thompson",
                 "politicianRole": "",
                 "role": "POLITICIAN",
                 "createdAt": "2025-01-01T00:00:00Z",
                 "updatedAt": "2025-01-10T00:00:00Z"
             },
-            "title": "Aumentar o salário dos professores",
-            "description": "Ajustar os salários dos professores para melhorar a qualidade de ensino.",
+            "title": "Increase Teacher Salaries",
+            "description": "Adjust teacher salaries to improve education quality.",
             "status": "PENDING",
             "endDate": "2025-12-31T00:00:00Z",
             "createdAt": "2025-01-02T00:00:00Z",
@@ -186,17 +186,17 @@
         {
             "id": 3,
             "authorId": 2,
-                        "author": {
+            "author": {
                 "id": 1,
                 "profilePictureURI": "https://apphub.com.br/pp.png",
-                "name": "Marcus Duarte",
+                "name": "Mark Anderson",
                 "politicianRole": "",
                 "role": "POLITICIAN",
                 "createdAt": "2025-01-01T00:00:00Z",
                 "updatedAt": "2025-01-10T00:00:00Z"
             },
-            "title": "Construir hospitais",
-            "description": "Construir hospitais em áreas afastadas e melhorar o sistema de saúde.",
+            "title": "Build Hospitals",
+            "description": "Build hospitals in remote areas and improve the healthcare system.",
             "status": "ACTIVE",
             "endDate": "2026-06-30T00:00:00Z",
             "createdAt": "2025-01-03T00:00:00Z",
@@ -208,17 +208,17 @@
         {
             "id": 4,
             "authorId": 2,
-                        "author": {
+            "author": {
                 "id": 1,
                 "profilePictureURI": "https://apphub.com.br/pp.png",
-                "name": "Leonardo Silva",
+                "name": "William Taylor",
                 "politicianRole": "",
                 "role": "POLITICIAN",
                 "createdAt": "2025-01-01T00:00:00Z",
                 "updatedAt": "2025-01-10T00:00:00Z"
             },
-            "title": "Aumentar a segurança pública",
-            "description": "Investir mais em segurança para reduzir a criminalidade nas grandes cidades.",
+            "title": "Enhance Public Safety",
+            "description": "Invest more in security to reduce crime rates in major cities.",
             "status": "ACTIVE",
             "endDate": "2026-06-30T00:00:00Z",
             "createdAt": "2025-01-04T00:00:00Z",
@@ -230,17 +230,17 @@
         {
             "id": 5,
             "authorId": 3,
-                        "author": {
+            "author": {
                 "id": 1,
                 "profilePictureURI": "https://apphub.com.br/pp.png",
-                "name": "Katia Ferreira",
+                "name": "Sarah Johnson",
                 "politicianRole": "",
                 "role": "POLITICIAN",
                 "createdAt": "2025-01-01T00:00:00Z",
                 "updatedAt": "2025-01-10T00:00:00Z"
             },
-            "title": "Reformar estradas estaduais",
-            "description": "Reformar estradas estaduais para garantir mais segurança no trânsito.",
+            "title": "Repair State Highways",
+            "description": "Repair state highways to ensure better traffic safety.",
             "status": "PENDING",
             "endDate": "2025-12-31T00:00:00Z",
             "createdAt": "2025-01-06T00:00:00Z",
@@ -248,9 +248,7 @@
             "current_funding_amount": 150000,
             "total_funding_amount": 600000,
             "current_funding_percentage": 25
-
         }
-
     ],
     "claims": []
 }
