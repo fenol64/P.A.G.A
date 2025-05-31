@@ -59,11 +59,12 @@ export function Navbar({ pageTitle, currentPage, backLink }) {
     </>
 }
 
-export function Container({ title, iconName, description, sizeLimit, className, children }) {
+export function Container({ title, header, iconName, description, sizeLimit, className, children }) {
     var style = {};
     // if (sizeLimit) style.maxWidth = sizeLimit;
     style.maxWidth = "45rem";
     return <div className={`container-fluid container-lg d-flex flex-column gap-3 p-3 ${className ?? ""}`} style={style}>
+        {!!header && header}
         {(title || description || iconName) && <header>
             <hgroup className="d-flex flex-row gap-3">
                 {iconName && <i className={`${iconName} fa-2x mt-1`}></i>}

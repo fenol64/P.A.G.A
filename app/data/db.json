@@ -138,5 +138,119 @@
             "updatedAt": "2025-01-19T00:00:00Z"
         }
     ],
+    "users_commitments": [
+            {
+            "id": 1,
+            "authorId": 1,
+            "author": {
+                "id": 1,
+                "profilePictureURI": "https://apphub.com.br/pp.png",
+                "name": "Marcelo Duarte",
+                "politicianRole": "",
+                "role": "POLITICIAN",
+                "createdAt": "2025-01-01T00:00:00Z",
+                "updatedAt": "2025-01-10T00:00:00Z"
+            },
+            "title": "Construir novas escolas",
+            "description": "Construir escolas em regiões mais carentes para melhorar a educação.",
+            "status": "ACTIVE",
+            "endDate": "2026-12-31T00:00:00Z",
+            "createdAt": "2025-01-01T00:00:00Z",
+            "updatedAt": "2025-01-10T00:00:00Z",
+            "current_funding_amount": 500000,
+            "total_funding_amount": 1000000,
+            "current_funding_percentage": 50
+        },
+        {
+            "id": 2,
+            "authorId": 1,
+                        "author": {
+                "id": 1,
+                "profilePictureURI": "https://apphub.com.br/pp.png",
+                "name": "Jéssica Almeida",
+                "politicianRole": "",
+                "role": "POLITICIAN",
+                "createdAt": "2025-01-01T00:00:00Z",
+                "updatedAt": "2025-01-10T00:00:00Z"
+            },
+            "title": "Aumentar o salário dos professores",
+            "description": "Ajustar os salários dos professores para melhorar a qualidade de ensino.",
+            "status": "PENDING",
+            "endDate": "2025-12-31T00:00:00Z",
+            "createdAt": "2025-01-02T00:00:00Z",
+            "updatedAt": "2025-01-11T00:00:00Z",
+            "current_funding_amount": 200000,
+            "total_funding_amount": 500000,
+            "current_funding_percentage": 40
+        },
+        {
+            "id": 3,
+            "authorId": 2,
+                        "author": {
+                "id": 1,
+                "profilePictureURI": "https://apphub.com.br/pp.png",
+                "name": "Marcus Duarte",
+                "politicianRole": "",
+                "role": "POLITICIAN",
+                "createdAt": "2025-01-01T00:00:00Z",
+                "updatedAt": "2025-01-10T00:00:00Z"
+            },
+            "title": "Construir hospitais",
+            "description": "Construir hospitais em áreas afastadas e melhorar o sistema de saúde.",
+            "status": "ACTIVE",
+            "endDate": "2026-06-30T00:00:00Z",
+            "createdAt": "2025-01-03T00:00:00Z",
+            "updatedAt": "2025-01-13T00:00:00Z",
+            "current_funding_amount": 300000,
+            "total_funding_amount": 800000,
+            "current_funding_percentage": 37.5
+        },
+        {
+            "id": 4,
+            "authorId": 2,
+                        "author": {
+                "id": 1,
+                "profilePictureURI": "https://apphub.com.br/pp.png",
+                "name": "Leonardo Silva",
+                "politicianRole": "",
+                "role": "POLITICIAN",
+                "createdAt": "2025-01-01T00:00:00Z",
+                "updatedAt": "2025-01-10T00:00:00Z"
+            },
+            "title": "Aumentar a segurança pública",
+            "description": "Investir mais em segurança para reduzir a criminalidade nas grandes cidades.",
+            "status": "ACTIVE",
+            "endDate": "2026-06-30T00:00:00Z",
+            "createdAt": "2025-01-04T00:00:00Z",
+            "updatedAt": "2025-01-14T00:00:00Z",
+            "current_funding_amount": 400000,
+            "total_funding_amount": 900000,
+            "current_funding_percentage": 44.4
+        },
+        {
+            "id": 5,
+            "authorId": 3,
+                        "author": {
+                "id": 1,
+                "profilePictureURI": "https://apphub.com.br/pp.png",
+                "name": "Katia Ferreira",
+                "politicianRole": "",
+                "role": "POLITICIAN",
+                "createdAt": "2025-01-01T00:00:00Z",
+                "updatedAt": "2025-01-10T00:00:00Z"
+            },
+            "title": "Reformar estradas estaduais",
+            "description": "Reformar estradas estaduais para garantir mais segurança no trânsito.",
+            "status": "PENDING",
+            "endDate": "2025-12-31T00:00:00Z",
+            "createdAt": "2025-01-06T00:00:00Z",
+            "updatedAt": "2025-01-15T00:00:00Z",
+            "current_funding_amount": 150000,
+            "total_funding_amount": 600000,
+            "current_funding_percentage": 25
+
+        }
+
+    ],
     "claims": []
 }

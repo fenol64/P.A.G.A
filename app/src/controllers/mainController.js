@@ -83,5 +83,19 @@ export default class mainController {
         }
     }
 
-
+    async sendTransaction(
+        _from,
+        value,
+    ) {
+        try {
+            const result = await this.provider.eth.sendTransaction({
+                from: _from,
+                to: this.contract_addr,
+                value: value,
+            });
+            return result;
+        } catch (error) {
+            console.error("Erro ao criar usuário:", error);
+        }
+    }
 }

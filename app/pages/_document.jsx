@@ -1,4 +1,5 @@
 import  { Html, Head, Main, NextScript } from "next/document";
+import { Container } from '@interchain-ui/react';
 
 
 export default function DocumentContainer() {
@@ -11,7 +12,9 @@ export default function DocumentContainer() {
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
             </Head>
             <body className="bg-light">
+    <Container maxWidth="64rem" attributes={{ py: '$14' }}>
                 <Main />
+    </Container>
                 <NextScript />
             </body>
         </Html>
