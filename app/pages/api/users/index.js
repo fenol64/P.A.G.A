@@ -1,5 +1,4 @@
 import { md5 } from "locutus/php/strings";
-import { middleware } from "root/middleware";
 import { imagePlaceholderURI } from "root/src/utils";
 
 /*
